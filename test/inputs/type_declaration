@@ -1,0 +1,2 @@
+define password_syntax as regexp "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+to connect you must type password as password_syntax
