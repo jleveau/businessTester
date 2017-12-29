@@ -1,7 +1,7 @@
 const Nightmare = require('nightmare');
 const nightmare = new Nightmare({show:true});
 const Parser = require('../parser/parser');
-const TestCaseFactory = require('../test_case_factory/test_case_factory');
+const TestCaseFactory = require('../test_suites/test_cases/test_case_factory');
 const NightmareFactory = require('../nightmare_factory/nightmare_factory');
 
 module.exports = {

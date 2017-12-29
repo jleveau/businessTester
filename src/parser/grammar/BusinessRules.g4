@@ -16,15 +16,17 @@ step                : type_action | submit;
 steps               : step AND steps| step;
 
 action_declaration	: TO IDENTIFIER YOU_MUST steps;
-action_declarations : action_declaration action_declarations | ;
+action_declarations : action_declaration action_declarations |;
 
 declared_action     : IDENTIFIER;
 
-execute_action      : declared_action;
-execute_actions     : execute_action execute_actions;
+execute_action      : DO declared_action;
+execute_actions     : execute_action execute_actions |;
 
-main                : type_declarations action_declarations execute_actions;
+declarations        : type_declarations action_declarations;
+executions          : execute_actions;
 
+main                : declarations executions;
 
 /*
  * Lexer Rules
@@ -40,6 +42,7 @@ REGEXP              : 'regexp';
 DEFINE              : 'define';
 ALPHANUM            : 'alphanumeric';
 TO 				    : 'to';
+DO                  : 'do';
 AS                  : 'as';
 YOU_MUST            : 'you must';
 TYPE_ACTION         : 'type';

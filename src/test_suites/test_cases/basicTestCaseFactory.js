@@ -1,30 +1,24 @@
-const TestCase = require("./test_case");
-const Action = require("./action");
-
+const TestCase = require('./test_case');
+const TestCaseAction = require('./test_case_action');
 const alphanumeric_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const RandExp = require('randexp');
-class TestCaseFactory {
+const TestCaseFactory = require('./test_case_factory');
 
-    createFromSpec(spec) {
-        return new Promise((resolve, reject) => {
-            try {
-                resolve(spec.actions.map((rule)=> createFromRule(rule, spec.types)));
-            }
-            catch(error) {
-                reject(error);
-            }
+class BasicTestCaseFactory extends TestCaseFactory{
+
+    createTestCase(actions, spec) {
+        let action_list = [];
+        actions.forEach((action) => {
+            action_list = action_list.concat(action.steps.map((step) => createBasicTestCaseAction(step, spec)))
         });
+        return new TestCase(action_list);
     }
 }
 
-function createFromRule(rule, type_list) {
-    const test = new TestCase();
-    test.action_list = rule.steps.map((step) => createAction(step, type_list));
-    return test;
-}
-
-function createAction(step, type_list) {
-    return new Action(step.action_type.target, step.action_type.nature, generateContent(step.action_type.content_nature, type_list));
+function createBasicTestCaseAction(step, spec) {
+    return new TestCaseAction(  step.action_nature.target,
+        step.action_nature.nature,
+        generateContent(step.action_nature.content_nature, spec.types));
 }
 
 function generateContent(content_type, type_list) {
@@ -55,4 +49,4 @@ function generateFromRegex(regex) {
     throw new Error("Failed to generate from regex : " + regex);
 }
 
-module.exports = new TestCaseFactory();
+module.exports = new BasicTestCaseFactory();

@@ -1,23 +1,24 @@
 const chai = require('chai');
 const expect = chai.expect;
 const path = require('path');
-const TestCaseFactory = require('../../src/test_case_factory/test_case_factory');
+const TestFactory = require('../../src/test_suites/testFactory');
 const Parser = require('../../src/parser/parser');
-const NightmareBuilder = require('../../src/nightmare_factory/nightmare_factory');
+const NightmareFactory = require('../../src/nightmare_factory/nightmare_factory');
 
 module.exports = function() {
     describe('builds a Nightmare Scenario from a test case contain one type action', () => {
 
-        it('convert a single rule with 2 actions', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/single_rule"))
-                .then((spec) => TestCaseFactory.createFromSpec(spec))
-                .then((test_cases) =>
-                    Promise.all(test_cases.map((test_case) => {
-                        const builder = new NightmareBuilder();
-                        return builder.toNightmare(test_case);
-                    })))
+        it('convert a single action with 2 actions', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/declare_and_execute_action"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test) => {
+                    const test_cases = test.test_cases;
+                    return Promise.all(test_cases.map((test_case) =>
+                        new NightmareFactory().toNightmare(test_case)))})
+
                 .then((scenarii) => {
                     expect(scenarii).to.have.lengthOf(1);
+
                     const scenario = scenarii[0];
                     expect(scenario.actions).to.have.lengthOf(2);
                     expect(scenario.actions[0].type).to.be.eql("TypeAction");
@@ -28,14 +29,16 @@ module.exports = function() {
                 .catch((error) => done(error))
         });
 
-        it('create no scenario from no rule', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/no_rule"))
-                .then((spec) => TestCaseFactory.createFromSpec(spec))
-                .then((test_cases) =>
-                    Promise.all(test_cases.map((test_case) => {
-                        const builder = new NightmareBuilder();
+        it('create no scenario from no action', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/no_execution"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test) => {
+                    const test_cases = [];
+                    return Promise.all(test_cases.map((test_case) => {
+                        const builder = new NightmareFactory();
                         return builder.toNightmare(test_case);
-                    })))
+                    }))
+                })
                 .then((scenarii) => {
                     expect(scenarii).to.have.lengthOf(0);
                     done();
@@ -43,19 +46,22 @@ module.exports = function() {
                 .catch((error) => done(error))
         });
 
-        it('create 2 from 2 rule', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/multiple_rules"))
-                .then((spec) => TestCaseFactory.createFromSpec(spec))
-                .then((test_cases) =>
-                    Promise.all(test_cases.map((test_case) => {
-                        const builder = new NightmareBuilder();
+        it('create 1 scenario from 2 action', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/multiple_actions_executions"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test) =>
+                    Promise.all(test.test_cases.map((test_case) => {
+                        const builder = new NightmareFactory();
                         return builder.toNightmare(test_case);
                     })))
                 .then((scenarii) => {
-                    expect(scenarii).to.have.lengthOf(2);
+                    expect(scenarii).to.have.lengthOf(1);
+                    expect(scenarii[0].actions).to.have.lengthOf(3);
                     done();
                 })
-                .catch((error) => done(error))
+                .catch((error) => {
+                    done(error);
+                })
         })
     });
 };

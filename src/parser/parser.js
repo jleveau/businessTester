@@ -3,6 +3,7 @@ const antlr4 = require('antlr4/index');
 const BusinessRulesLexer = require('./BusinessRulesLexer');
 const BusinessRulesParser = require('./BusinessRulesParser');
 const BusinessRulesVisitor = require('./BusinessRulesVisitor');
+const CustomErrorListener = require('./ErrorListener');
 
 class Parser {
 
@@ -13,6 +14,8 @@ class Parser {
                 const lexer = new BusinessRulesLexer.BusinessRulesLexer(chars);
                 const tokens = new antlr4.CommonTokenStream(lexer);
                 const parser = new BusinessRulesParser.BusinessRulesParser(tokens);
+                parser.removeErrorListeners();
+                parser.addErrorListener(new CustomErrorListener());
                 parser.buildParseTrees = true;
                 const visitor = new BusinessRulesVisitor.BusinessRulesVisitor();
 

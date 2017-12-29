@@ -6,7 +6,7 @@ class NightmareFactory{
         return new Promise((resolve, reject) => {
             try {
                 const scenario = new wat_action.Scenario();
-                test_case.action_list.forEach((action) => readAction(scenario, action));
+                test_case.test_case_actions.forEach((action) => readAction(scenario, action));
                 resolve(scenario);
             }
             catch(error) {
@@ -14,7 +14,6 @@ class NightmareFactory{
             }
         });
     }
-
 }
 
 function readAction(scenario, action) {

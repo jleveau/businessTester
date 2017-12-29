@@ -1,4 +1,4 @@
-class Action {
+class TestCaseAction {
 
     constructor(target, nature, content= "") {
         this.target = target;
@@ -8,4 +8,4 @@ class Action {
 
 }
 
-module.exports = Action;
+module.exports = TestCaseAction;
