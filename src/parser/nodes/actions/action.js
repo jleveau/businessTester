@@ -1,8 +1,7 @@
-class Action extends Object{
+class Action{
 
     constructor(name, steps)
     {
-        super();
         this.name = name;
         this.steps = steps;
     }

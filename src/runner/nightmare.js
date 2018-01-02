@@ -1,17 +1,17 @@
 const Nightmare = require('nightmare');
 const nightmare = new Nightmare({show:true});
 const Parser = require('../parser/parser');
-const TestCaseFactory = require('../test_suites/test_cases/test_case_factory');
+const TestFactory = require('../test_suites/testFactory');
 const NightmareFactory = require('../nightmare_factory/nightmare_factory');
 
 module.exports = {
     run : (inputFile) => {
         Parser.parseFile(inputFile)
-            .then((spec) =>
-                TestCaseFactory.createFromSpec(spec))
-            .then((test_cases) =>
-                Promise.all(test_cases.map((test_case) => {
-                    return  new NightmareFactory().toNightmare(test_case);
+            .then((spec) => new TestFactory().create(spec))
+            .then((test) =>
+                Promise.all(test.test_cases.map((test_case) => {
+                    const builder = new NightmareFactory();
+                    return builder.toNightmare(test_case);
                 })))
             .then((scenarii) => {
                 const scenario = scenarii[0];

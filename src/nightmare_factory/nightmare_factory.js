@@ -18,15 +18,15 @@ class NightmareFactory{
 
 function readAction(scenario, action) {
     let nightmare_action = null;
-    switch(action.nature) {
+    switch(action.name) {
         case 'type':
             nightmare_action = new wat_action.TypeAction('#' + action.target, action.content);
             break;
-        case 'submit':
-            nightmare_action = new wat_action.ClickAction('#submit');
+        case 'go_to':
+            nightmare_action = new wat_action.GotoAction(action.url);
             break;
         default :
-            throw new Error("nature : " + action.nature + " is not supported");
+            throw new Error("name : " + action.name + " is not supported");
     }
     scenario.addAction(nightmare_action);
 }

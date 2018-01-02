@@ -2,22 +2,24 @@ const chai = require('chai');
 const expect = chai.expect;
 const Parser = require('../../src/parser/parser');
 const path = require('path');
+const action_natures = require("../../src/parser/nodes/actions/action_nature");
+const Action = require("../../src/parser/nodes/actions/action");
+const Spec = require("../../src/parser/nodes/spec");
 
 module.exports = function() {
 
     describe('parsing actions declaration', () => {
         it('parse a action and should success', (done) => {
             Parser.parseFile(path.join(__dirname, '../inputs/single_action')).then((spec) => {
-                expect(spec.actions).to.have.lengthOf(1);
+                expect(spec.actions).to.have.lengthOf(Spec.DEFAULT_ACTIONS().length + 1);
                 expect(spec.types).to.have.lengthOf(0);
 
-                const action = spec.actions[0];
+                const action = spec.actions.find((action) => action.name === "connect");
+                expect(action).to.not.be.eql(null);
+                expect(action).to.be.instanceOf(Action);
                 expect(action.name).to.be.eql('connect');
                 expect(action.steps).to.have.lengthOf(2);
 
-                expect(action.steps[0].action_nature.target).to.be.eql("login");
-                expect(action.steps[0].action_nature.content_nature).to.be.eql("alphanumeric");
-                expect(action.steps[0].action_nature.nature).to.be.eql("type");
                 done();
             }).catch((error) => {
                 return done(error);
@@ -27,7 +29,7 @@ module.exports = function() {
         it('parse multiple actions and should success', (done) => {
             Parser.parseFile(path.join(__dirname, '../inputs/multiple_actions'))
                 .then((spec) => {
-                    expect(spec.actions).to.have.lengthOf(2);
+                    expect(spec.actions).to.have.lengthOf(Spec.DEFAULT_ACTIONS().length + 2);
                     expect(spec.types).to.have.lengthOf(0);
                     done();
                 }).catch((error) => {
@@ -38,7 +40,7 @@ module.exports = function() {
         it('parse no action', (done) => {
             Parser.parseFile(path.join(__dirname, '../inputs/no_action'))
                 .then((spec) => {
-                    expect(spec.actions).to.have.lengthOf(0);
+                    expect(spec.actions).to.have.lengthOf(Spec.DEFAULT_ACTIONS().length);
                     expect(spec.types).to.have.lengthOf(0);
                     done();
                 }).catch((error) => {
@@ -49,7 +51,7 @@ module.exports = function() {
         it('parse a type declaration from a regex', (done) => {
             Parser.parseFile(path.join(__dirname, '../inputs/type_declaration'))
                 .then((spec) => {
-                    expect(spec.actions).to.have.lengthOf(1);
+                    expect(spec.actions).to.have.lengthOf(Spec.DEFAULT_ACTIONS().length + 1);
                     expect(spec.types).to.have.lengthOf(1);
                     done();
                 }).catch((error) => {
@@ -103,5 +105,45 @@ module.exports = function() {
                 done();
             });
         });
-    })
+    });
+
+    describe("Parse Actions", () => {
+
+        describe("Type Action", () => {
+            it("should create a type action", (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/single_action'))
+                    .then((spec) => {
+                        expect(spec.actions).to.have.lengthOf(Spec.DEFAULT_ACTIONS().length + 1);
+                        const action = spec.actions.find((action) => action.name === "connect");
+                        const type_action = action.steps[0];
+                        expect(type_action.target).to.be.eql("login");
+                        expect(type_action.content_nature).to.be.eql("alphanumeric");
+                        done();
+                    })
+                    .catch((err) => done(err))
+            });
+
+            it("should fail to create type action of unknown name", (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/type_action_with_no_target'))
+                    .then((spec) => {
+                        done(new Error("should have failed"));
+                    })
+                    .catch((err) => done())
+            })
+        });
+        describe("Go To Action", () => {
+            it("should create a go to action", (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/declare_with_go_to')).then((spec) => {
+                    expect(spec.actions).to.have.lengthOf(Spec.DEFAULT_ACTIONS().length + 1);
+                    const action = spec.actions.find((action) => action.name === "start");
+                    const go_to_action = action.steps[0];
+                    expect(go_to_action).to.be.instanceOf(action_natures.GoToAction);
+                    expect(go_to_action.url).to.be.eql("https://www.khubla.com");
+                    done();
+                })
+                    .catch((err) => done(err))
+
+            })
+        });
+    });
 };

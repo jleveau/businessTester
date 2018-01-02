@@ -1,8 +1,9 @@
 const TestCase = require('./test_case');
-const TestCaseAction = require('./test_case_action');
 const alphanumeric_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const RandExp = require('randexp');
 const TestCaseFactory = require('./test_case_factory');
+const TestCaseActionNatures = require('./actions/test_cases_actions_natures');
+
 
 class BasicTestCaseFactory extends TestCaseFactory{
 
@@ -16,9 +17,13 @@ class BasicTestCaseFactory extends TestCaseFactory{
 }
 
 function createBasicTestCaseAction(step, spec) {
-    return new TestCaseAction(  step.action_nature.target,
-        step.action_nature.nature,
-        generateContent(step.action_nature.content_nature, spec.types));
+    if (step.name === "type") {
+        return new TestCaseActionNatures.TestCaseTypeAction(step.target,
+            step.name,
+            generateContent(step.content_nature, spec.types));
+    } else if (step.name = "go_to") {
+        return new TestCaseActionNatures.TestCaseGoToAction(step.url)
+    }
 }
 
 function generateContent(content_type, type_list) {
@@ -26,7 +31,7 @@ function generateContent(content_type, type_list) {
         return null;
     } else if (content_type === "alphanumeric") {
         return generateRandomAlphanumeric();
-    } else if (type = type_list.find((declared_type) => content_type === declared_type.nature)) {
+    } else if (type = type_list.find((declared_type) => content_type === declared_type.name)) {
         return generateFromRegex(type.regex);
     } else {
         throw new Error("Type : " + content_type + " is not a declared type");

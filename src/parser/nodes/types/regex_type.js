@@ -2,8 +2,8 @@ const TypeDeclared = require("./type_declared");
 
 class RegexType extends TypeDeclared {
 
-    constructor(nature, regex) {
-        super(nature);
+    constructor(name, regex) {
+        super(name);
         this.regex = regex
     }
 }

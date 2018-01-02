@@ -1,6 +1,6 @@
 class TypeDeclared {
     constructor(nature) {
-        this.nature = nature;
+        this.name = nature;
     }
 }
 

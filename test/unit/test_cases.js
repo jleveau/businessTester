@@ -33,7 +33,7 @@ module.exports = function() {
                     expect(test_case.test_case_actions).to.have.lengthOf(2);
 
                     const action = test_case.test_case_actions[0];
-                    expect(action.nature).to.be.eql("type");
+                    expect(action.name).to.be.eql("type");
                     expect(action.content).to.match(/^\w+$/);
                     expect(action.target).to.be.eql('login');
                     done();

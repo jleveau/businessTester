@@ -1,0 +1,17 @@
+const Action = require("./action");
+
+class TypeAction extends Action{
+
+    constructor(target, content_nature, content) {
+        super('type');
+        if (target === null || content_nature === null) {
+            throw Error("You can't create an action type Type with no target or content");
+        }
+        this.target = target;
+        this.content = content;
+        this.content_nature = content_nature;
+    }
+
+}
+
+module.exports = TypeAction;
