@@ -32,6 +32,11 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         return ctx.getText()
     }
 
+    visitClick_action(ctx, spec) {
+        const target = ctx.IDENTIFIER().getText();
+        return new action_natures.ClickAction(target);
+    }
+
     visitType_action(ctx, spec) {
         return new action_natures.TypeAction(ctx.IDENTIFIER().getText(), this.visitDeclared_type(ctx.declared_type(), spec));
     }
@@ -91,11 +96,17 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
      /*   if (ctx.declared_action()) {
             return this.visitDeclared_action(ctx.declared_action(), spec);
         }*/
+        if(ctx.click_action()) {
+            return this.visitClick_action(ctx.click_action(), spec);
+        }
         if (ctx.type_action()) {
             return this.visitType_action(ctx.type_action(), spec);
         }
         if(ctx.go_to_action()) {
             return this.visitGo_to_action(ctx.go_to_action(), spec);
+        }
+        if(ctx.declared_action()) {
+            return this.visitDeclared_action(ctx.declared_action(), spec);
         }
     }
 

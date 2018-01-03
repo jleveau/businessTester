@@ -86,5 +86,28 @@ module.exports = function() {
                     done(error);
                 })
         });
+
+        it('create a scenario containing a "click"', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/click_action"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test) =>
+                    Promise.all(test.test_cases.map((test_case) => {
+                        const builder = new NightmareFactory();
+                        return builder.toNightmare(test_case);
+                    })))
+                .then((scenarii) => {
+                    expect(scenarii).to.have.lengthOf(1);
+
+                    const scenario = scenarii[0];
+                    expect(scenario.actions).to.have.lengthOf(1);
+                    expect(scenario.actions[0].type).to.be.eql("ClickAction");
+                    expect(scenario.actions[0].selector).to.be.eql('#talk_button');
+
+                    done();
+                })
+                .catch((error) => {
+                    done(error);
+                })
+        });
     });
 };

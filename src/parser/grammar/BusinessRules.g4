@@ -4,6 +4,8 @@ grammar BusinessRules;
  */
 type_action         : TYPE_ACTION IDENTIFIER AS declared_type;
 go_to_action        : GO_TO_ACTION url;
+click_action        : CLICK_ON IDENTIFIER;
+
 declared_action     : IDENTIFIER;
 
 url                 : QUOTED_CONTENT;
@@ -16,7 +18,7 @@ type_description    : regex;
 type_declaration    : DEFINE IDENTIFIER AS type_description;
 type_declarations   : type_declarations type_declaration |;
 
-step                : type_action | go_to_action;
+step                : click_action | type_action | go_to_action | declared_action;
 steps               : step | step AND steps;
 
 action_declaration	: TO IDENTIFIER YOU_MUST steps;
@@ -49,6 +51,7 @@ REGEXP              : 'regexp';
 DEFINE              : 'define';
 ALPHANUM            : 'alphanumeric';
 GO_TO_ACTION        : 'go to';
+CLICK_ON            : 'click on';
 TO 				    : 'to';
 DO                  : 'do';
 AS                  : 'as';

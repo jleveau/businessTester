@@ -25,6 +25,9 @@ function readAction(scenario, action) {
         case 'go_to':
             nightmare_action = new wat_action.GotoAction(action.url);
             break;
+        case 'click':
+            nightmare_action = new wat_action.ClickAction('#' + action.target);
+            break;
         default :
             throw new Error("name : " + action.name + " is not supported");
     }

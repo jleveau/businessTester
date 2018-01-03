@@ -21,8 +21,10 @@ function createBasicTestCaseAction(step, spec) {
         return new TestCaseActionNatures.TestCaseTypeAction(step.target,
             step.name,
             generateContent(step.content_nature, spec.types));
-    } else if (step.name = "go_to") {
+    } else if (step.name === "go_to") {
         return new TestCaseActionNatures.TestCaseGoToAction(step.url)
+    } else if (step.name === "click") {
+        return new TestCaseActionNatures.TestCaseClickAction(step.target);
     }
 }
 
