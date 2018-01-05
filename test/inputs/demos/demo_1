@@ -1,0 +1,9 @@
+to launch you must go to "localhost:3000"
+
+to connect you must type login as "Bob",
+                       password as "nutella"
+
+to say_something you must type input_text as word
+to chat you must launch and connect and say_something
+
+do chat

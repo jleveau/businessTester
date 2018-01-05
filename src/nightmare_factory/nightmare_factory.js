@@ -1,4 +1,5 @@
 const wat_action = require('wat-action');
+const DEFAULT_WAIT_TIME = 1000;
 
 class NightmareFactory{
 
@@ -17,21 +18,21 @@ class NightmareFactory{
 }
 
 function readAction(scenario, action) {
-    let nightmare_action = null;
     switch(action.name) {
         case 'type':
-            nightmare_action = new wat_action.TypeAction('#' + action.target, action.content);
+            scenario.addAction(new wat_action.TypeAction('#' + action.target, action.content));
             break;
         case 'go_to':
-            nightmare_action = new wat_action.GotoAction(action.url);
+            scenario.addAction(new wat_action.GotoAction(action.url));
+            scenario.addAction(new wat_action.WaitAction(DEFAULT_WAIT_TIME));
             break;
         case 'click':
-            nightmare_action = new wat_action.ClickAction('#' + action.target);
+            scenario.addAction(new wat_action.ClickAction('#' + action.target));
+            scenario.addAction(new wat_action.WaitAction(DEFAULT_WAIT_TIME));
             break;
         default :
             throw new Error("name : " + action.name + " is not supported");
     }
-    scenario.addAction(nightmare_action);
 }
 
 module.exports = NightmareFactory;

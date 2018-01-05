@@ -1,16 +1,18 @@
 const chai = require('chai');
 const expect = chai.expect;
+const path = require("path");
 const Parser = require('../../src/parser/parser');
-const path = require('path');
 const action_natures = require("../../src/parser/nodes/actions/action_nature");
+const Types = require('../../src/parser/nodes/types/types');
 const Action = require("../../src/parser/nodes/actions/action");
-const Spec = require("../../src/parser/nodes/spec");
+const TypeActionEntry = require("../../src/parser/nodes/actions/type_action_entry");
+
 
 module.exports = function() {
 
-    describe('parsing actions declaration', () => {
+    describe('Action Declaration', () => {
         it('parse a action and should success', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/single_action')).then((spec) => {
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/single_action')).then((spec) => {
                 expect(spec.actions).to.have.lengthOf(1);
                 expect(spec.types).to.have.lengthOf(0);
 
@@ -27,7 +29,7 @@ module.exports = function() {
         });
 
         it('parse multiple actions and should success', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/multiple_actions'))
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/multiple_actions'))
                 .then((spec) => {
                     expect(spec.actions).to.have.lengthOf(2);
                     expect(spec.types).to.have.lengthOf(0);
@@ -38,7 +40,7 @@ module.exports = function() {
         });
 
         it('parse no action', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/no_action'))
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/no_action'))
                 .then((spec) => {
                     expect(spec.actions).to.have.lengthOf(0);
                     expect(spec.types).to.have.lengthOf(0);
@@ -48,32 +50,8 @@ module.exports = function() {
             });
         });
 
-        it('parse a type declaration from a regex', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/type_declaration'))
-                .then((spec) => {
-                    expect(spec.actions).to.have.lengthOf(1);
-                    expect(spec.types).to.have.lengthOf(1);
-                    done();
-                }).catch((error) => {
-                return done(error);
-            });
-        });
-
-        it('should fail to declare an action from undeclared type', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/undeclared_type'))
-                .then(() => {
-                    done(new Error("should have failed"));
-                })
-                .catch((error) => {
-                    if (error.message === "Type password_syntax is not declared") {
-                        return done();
-                    }
-                    return done(error);
-                });
-        });
-
         it('should declare an action using a previously declared action', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/declaring_action_composition'))
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/action_composition'))
                 .then((spec) => {
                     expect(spec.actions).to.have.lengthOf(3);
                     expect(spec.executions).to.have.lengthOf(1);
@@ -104,11 +82,77 @@ module.exports = function() {
             });
         });
     });
+    describe('Type declaration', () => {
+
+        it('parse a type_declared action declaration from a fixed value', (done) => {
+            Parser.parseFile(path.join(__dirname, '../inputs/types/fixed_value'))
+                .then((spec) => {
+                    expect(spec.actions).to.have.lengthOf(1);
+                    const action = spec.actions[0];
+                    const type_action = action.steps[0];
+                    const fixed_value_type = type_action.entries[0];
+                    const entry_nature = fixed_value_type.content_nature;
+                    expect(entry_nature).to.be.instanceOf(Types.FixedValueType);
+
+                    expect(entry_nature.name).to.be.eql("fixed");
+                    expect(entry_nature.value).to.be.eql("12");
+
+                    done();
+                }).catch((error) => {
+                return done(error);
+            })
+        });
+
+        it('parse an action declaration from a regex', (done) => {
+            Parser.parseFile(path.join(__dirname, '../inputs/types/type_declared'))
+                .then((spec) => {
+                    expect(spec.actions).to.have.lengthOf(1);
+                    expect(spec.types).to.have.lengthOf(1);
+                    done();
+                }).catch((error) => {
+                return done(error);
+            });
+        });
+
+        it('should fail to declare an action from undeclared type_declared', (done) => {
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/undeclared_type'))
+                .then(() => {
+                    done(new Error("should have failed"));
+                })
+                .catch((error) => {
+                    if (error.message === "Type password_syntax is not declared") {
+                        return done();
+                    }
+                    return done(error);
+                });
+        });
+    });
+
+    describe("Entry Declaration", () => {
+
+        it("should create a type action using a declared entry", (done) => {
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/entry'))
+                .then((spec) => {
+                    expect(spec.actions).to.have.lengthOf(1);
+                    expect(spec.actions[0].name).to.be.eql('add');
+                    const add_action = spec.actions[0];
+                    expect(add_action.steps).to.have.lengthOf(1);
+                    expect(add_action.steps[0]).to.be.instanceOf(action_natures.TypeAction);
+                    const type_action = add_action.steps[0];
+                    expect(type_action.entries).to.have.lengthOf(2);
+                    expect(type_action.entries[0]).to.be.instanceOf(TypeActionEntry);
+                    done();
+                }).catch((error) => {
+                done(error);
+            });
+        });
+
+    });
 
     describe("Parsing action execution", () => {
 
         it('should constain the declaration and the execution of an action', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/declare_and_execute_action'))
+            Parser.parseFile(path.join(__dirname, '../inputs/executions/declared_action'))
                 .then((spec) => {
                     expect(spec.executions).to.have.lengthOf(1);
                     expect(spec.executions[0]).to.be.eql("connect");
@@ -119,7 +163,7 @@ module.exports = function() {
         });
 
         it('should fail to execute an undeclared action', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/execute_undeclared_action'))
+            Parser.parseFile(path.join(__dirname, '../inputs/executions/undeclared_action'))
                 .then(() => {
                     expect()
                 }).catch((error) => {
@@ -129,11 +173,11 @@ module.exports = function() {
         });
 
         it('should fail to parse not well formed declaration', (done) => {
-            Parser.parseFile(path.join(__dirname, '../inputs/bad_input'))
+            Parser.parseFile(path.join(__dirname, '../inputs/declarations/bad_input'))
                 .then(() => {
                     done(new Error("Should have failed"));
                 }).catch((error) => {
-                expect(error.message).to.be.eql("no viable alternative at input 'typetextas'");
+                expect(error.message).to.be.eql("no viable alternative at input 'typetextas' at line : 2, col : 0");
                 done();
             });
         });
@@ -142,30 +186,55 @@ module.exports = function() {
     describe("Parse Actions", () => {
 
         describe("Type Action", () => {
-            it("should create a type action", (done) => {
-                Parser.parseFile(path.join(__dirname, '../inputs/single_action'))
+
+            it("should create a type_declared action", (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/declarations/single_action'))
                     .then((spec) => {
                         expect(spec.actions).to.have.lengthOf(1);
                         const action = spec.actions.find((action) => action.name === "connect");
                         const type_action = action.steps[0];
-                        expect(type_action.target).to.be.eql("login");
-                        expect(type_action.content_nature).to.be.eql("alphanumeric");
+                        const type_entries = type_action.entries;
+                        expect(type_entries).to.have.lengthOf(1);
+                        const type_entry = type_entries[0];
+                        expect(type_entry).to.be.instanceOf(TypeActionEntry);
+
+                        expect(type_entry.target).to.be.eql("login");
+                        expect(type_entry.content_nature).to.be.eql("alphanumeric");
                         done();
                     })
                     .catch((err) => done(err))
             });
 
-            it("should fail to create type action of unknown name", (done) => {
-                Parser.parseFile(path.join(__dirname, '../inputs/type_action_with_no_target'))
+            it("should fail to create type_declared action of unknown name", (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/action_natures/type_action_no_target'))
                     .then(() => {
                         done(new Error("should have failed"));
                     })
                     .catch(() => done())
-            })
+            });
+
+            it('parse a type_declared action using a list of entries', (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/action_natures/type_list_of_entries'))
+                    .then((spec) => {
+                        expect(spec.actions).to.have.lengthOf(1);
+                        const action = spec.actions[0];
+                        const type_action = action.steps[0];
+                        expect(type_action.entries).to.be.lengthOf(3);
+                        type_action.entries.forEach((entry) => {
+                            expect(entry).to.be.instanceOf(TypeActionEntry);
+                        });
+                        const entry = type_action.entries[0];
+                        expect(entry.content_nature).to.be.instanceOf(Types.FixedValueType);
+                        expect(entry.target).to.be.eql('user');
+                        done();
+                    }).catch((error) => {
+                    return done(error);
+                });
+            });
         });
         describe("Go To Action", () => {
             it("should create a go to action", (done) => {
-                Parser.parseFile(path.join(__dirname, '../inputs/declare_with_go_to')).then((spec) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/action_natures/go_to_action')).then((spec) => {
                     expect(spec.actions).to.have.lengthOf(1);
                     const action = spec.actions.find((action) => action.name === "start");
                     const go_to_action = action.steps[0];
@@ -180,7 +249,7 @@ module.exports = function() {
 
         describe("Click Action", () => {
             it("should create a click action", (done) => {
-                Parser.parseFile(path.join(__dirname, '../inputs/click_action')).then((spec) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/action_natures/click_action')).then((spec) => {
                     expect(spec.actions).to.have.lengthOf(1);
                     const action = spec.actions.find((action) => action.name === "talk");
                     const click_action = action.steps[0];

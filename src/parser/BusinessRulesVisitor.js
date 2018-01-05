@@ -1,10 +1,12 @@
 // Generated from C:/Users/jleveau/WebstormProjects/parser/grammar\BusinessRules.g4 by ANTLR 4.7
 // jshint ignore: start
 const Action = require('./nodes/actions/action');
+const Types = require('./nodes/types/types');
 const RegexType = require('./nodes/types/regex_type');
 const Spec = require('./nodes/spec');
 const antlr4 = require('antlr4/index');
 const action_natures = require('./nodes/actions/action_nature');
+const TypeActionEntry = require('./nodes/actions/type_action_entry');
 
 // This class defines a complete generic visitor for a parse tree produced by BusinessRulesParser.
 
@@ -24,21 +26,50 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         return ctx.getText()
     }
 
-    // Visit a parse tree produced by BusinessRulesParser#declared_type.
-    visitDeclared_type(ctx, spec) {
-        if (ctx.custom_type()) {
-            return this.visitCustom_type(ctx.custom_type(), spec);
-        }
-        return ctx.getText()
-    }
-
     visitClick_action(ctx, spec) {
         const target = ctx.IDENTIFIER().getText();
         return new action_natures.ClickAction(target);
     }
 
+    visitEntryValue(ctx, spec) {
+        if (ctx.type_description()) {
+            return this.visitType_description(ctx.type_description(), spec);
+        } else {
+            throw new Error("Invalid call");
+        }
+    }
+
+    visitDeclared_entry(ctx, spec) {
+        const entry_name = ctx.IDENTIFIER().getText();
+        const entry = spec.entries[entry_name];
+        if (!entry) {
+            throw new Error('Entry ' + entry_name + 'has not been declared');
+        }
+        return entry;
+    }
+
+    visitEntry(ctx, spec) {
+        const target = ctx.IDENTIFIER().getText();
+        const content_nature = this.visitEntryValue(ctx.entry_value(), spec);
+        return new TypeActionEntry(content_nature, target);
+    }
+
+    visitEntries(ctx, spec, entries_list=[]) {
+        if (ctx.entry()) {
+            entries_list.push(this.visitEntry(ctx.entry(), spec));
+        }
+        if (ctx.declared_entry()) {
+            entries_list = entries_list.concat(this.visitDeclared_entry(ctx.declared_entry(), spec));
+        }
+        if (ctx.entries()) {
+            this.visitEntries(ctx.entries(), spec, entries_list);
+        }
+        return entries_list;
+    }
+
     visitType_action(ctx, spec) {
-        return new action_natures.TypeAction(ctx.IDENTIFIER().getText(), this.visitDeclared_type(ctx.declared_type(), spec));
+        const entries = this.visitEntries(ctx.entries(), spec);
+        return new action_natures.TypeAction(entries);
     }
 
     visitUrl(ctx) {
@@ -62,18 +93,45 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         return ctx.QUOTED_CONTENT().getText();
     }
 
-    static visitTypeDescription(ctx, spec) {
-        if (ctx.regex()) {
-            const regex = BusinessRulesVisitor.visitRegex(ctx.regex(), spec);
-            return new RegexType("", regex.slice(1, regex.length-1))
+    visitDefault_type(ctx, spec) {
+        if (ctx.ALPHANUM()) {
+            return ctx.ALPHANUM().getText();
+        } else if (ctx.NUMBER()) {
+            return ctx.NUMBER().getText();
+        } else if (ctx.BOOLEAN()) {
+            return ctx.BOOLEAN().getText();
+        } else if (ctx.WORD()) {
+            return ctx.WORD().getText();
         }
-        throw new Error("Can't find any type description");
+        throw new Error("type_declared does not exists");
     }
 
-// Visit a parse tree produced by BusinessRulesParser#type_declaration.
-    static visitType_declaration(ctx, spec) {
+    visitFixed_value_type(ctx, spec) {
+        const quoted_content = ctx.QUOTED_CONTENT().getText();
+        return new Types.FixedValueType(quoted_content.slice(1, quoted_content.length-1));
+    }
+
+    visitType_description(ctx, spec) {
+        if (ctx.regex_type()) {
+            const regex = BusinessRulesVisitor.visitRegex(ctx.regex_type(), spec);
+            return new RegexType("", regex.slice(1, regex.length-1))
+        }
+        if (ctx.custom_type()) {
+            return this.visitCustom_type(ctx.custom_type(), spec);
+        }
+        if (ctx.default_type()) {
+            return this.visitDefault_type(ctx.default_type(), spec);
+        }
+        if (ctx.fixed_value_type()) {
+            return this.visitFixed_value_type(ctx.fixed_value_type(), spec);
+        }
+        throw new Error("Can't find any type_declared description");
+    }
+
+// Visit a parse tree produced by BusinessRulesParser#type_declared.
+    visitType_declaration(ctx, spec) {
         if (ctx.type_description()) {
-            const type = BusinessRulesVisitor.visitTypeDescription(ctx.type_description(), spec);
+            const type = this.visitType_description(ctx.type_description(), spec);
             type.name = ctx.IDENTIFIER().getText();
             return type;
         }
@@ -85,7 +143,7 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         if (!ctx.type_declarations() || !ctx.type_declaration()) {
             return;
         }
-        spec.types.push(BusinessRulesVisitor.visitType_declaration(ctx.type_declaration()));
+        spec.types.push(this.visitType_declaration(ctx.type_declaration()));
         if (ctx.type_declarations()) {
             this.visitType_declarations(ctx.type_declarations(), spec);
         }
@@ -93,9 +151,9 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
 
 // Visit a parse tree produced by BusinessRulesParser#step.
     visitStep(ctx, spec){
-     /*   if (ctx.declared_action()) {
-            return this.visitDeclared_action(ctx.declared_action(), spec);
-        }*/
+        /*   if (ctx.declared_action()) {
+               return this.visitDeclared_action(ctx.declared_action(), spec);
+           }*/
         if(ctx.click_action()) {
             return this.visitClick_action(ctx.click_action(), spec);
         }
@@ -155,7 +213,29 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         }
     }
 
+    visitEntryDeclaration(ctx, spec) {
+        const entry_name = ctx.IDENTIFIER().getText();
+        const entry = this.visitEntries(ctx.entries(), spec);
+        return {
+            name: entry_name,
+            entry
+        };
+    }
+
+    visitEntryDeclarations(ctx, spec) {
+        if (ctx.entry_declaration()) {
+            const entry_obj = this.visitEntryDeclaration(ctx.entry_declaration(), spec);
+            spec.entries[entry_obj.name] = entry_obj.entry;
+        }
+        if (ctx.entry_declarations()) {
+            this.visitEntryDeclarations(ctx.entry_declarations(), spec);
+        }
+    }
+
     visitDeclarations(ctx, spec) {
+        if (ctx.entry_declarations()) {
+            this.visitEntryDeclarations(ctx.entry_declarations(), spec);
+        }
         if (ctx.type_declarations()) {
             this.visitType_declarations(ctx.type_declarations(), spec);
         }

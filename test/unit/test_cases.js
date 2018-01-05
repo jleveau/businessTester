@@ -8,10 +8,10 @@ const TestCase = require('../../src/test_suites/test_cases/test_case');
 
 module.exports = function() {
 
-    describe('create Tests cases from actions execution with only one test case factory', () => {
+    describe('Basic Test Case', () => {
 
         it('creates a test case from one action', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/declare_and_execute_action"))
+            Parser.parseFile(path.join(__dirname, "../inputs/executions/declared_action"))
                 .then((spec) => new TestFactory().create(spec))
                 .then((test)=> {
                     expect(test.test_cases).to.have.lengthOf(1);
@@ -23,28 +23,105 @@ module.exports = function() {
                     done(err))
         });
 
-        it('checks if BasicTestCase generate a correct test case', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/declare_and_execute_action"))
+        it('create from type_declared alphanum', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/types/alphanum"))
                 .then((spec) => new TestFactory().create(spec))
                 .then((test)=> {
 
                     const test_case = test.test_cases[0];
-                    expect(test.test_cases).to.have.lengthOf(1);
-                    expect(test_case.test_case_actions).to.have.lengthOf(2);
-
                     const action = test_case.test_case_actions[0];
                     expect(action.name).to.be.eql("type");
                     expect(action.content).to.match(/^\w+$/);
-                    expect(action.target).to.be.eql('login');
                     done();
                 })
                 .catch((err) =>
                     done(err))
         });
 
-        it('creates a test case using custom regex', (done)=> {
+        it('create from type_declared word', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/types/word"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    const test_case = test.test_cases[0];
+                    const action = test_case.test_case_actions[0];
+                    expect(action.name).to.be.eql("type");
+                    expect(action.content).to.match(/[a-zA-Z]+/);
+                    done();
+                })
+                .catch((err) =>
+                    done(err))        });
+
+        it('create from type_declared numeric', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/types/number"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    const test_case = test.test_cases[0];
+                    const action = test_case.test_case_actions[0];
+                    expect(action.name).to.be.eql("type");
+                    expect(parseInt(action.content)).to.not.be.eql(NaN);
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
+
+        });
+
+        it('create from type_declared boolean', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/types/boolean"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    const test_case = test.test_cases[0];
+                    const action = test_case.test_case_actions[0];
+                    expect(action.name).to.be.eql("type");
+                    expect(typeof action.content).to.be.eql('boolean');
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
+        });
+
+        it('create from list of entries', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/action_natures/type_list_of_entries"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    const test_case = test.test_cases[0];
+                    expect(test_case.test_case_actions).to.have.lengthOf(3);
+                    test_case.test_case_actions.forEach((action) => expect(action.name).to.be.eql('type'));
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
+        });
+
+        it('create from click action', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/action_natures/click_action"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    const test_case = test.test_cases[0];
+                    expect(test_case.test_case_actions).to.have.lengthOf(1);
+                    test_case.test_case_actions.forEach((action) => expect(action.name).to.be.eql('click'));
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
+        });
+
+        it('create from go_to action', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/action_natures/go_to_action"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    const test_case = test.test_cases[0];
+                    expect(test_case.test_case_actions).to.have.lengthOf(1);
+                    test_case.test_case_actions.forEach((action) => expect(action.name).to.be.eql('go_to'));
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
+        });
+
+        it('creates from custom regex', (done)=> {
             let types;
-            Parser.parseFile(path.join(__dirname, "../inputs/type_declaration"))
+            Parser.parseFile(path.join(__dirname, "../inputs/types/type_declared"))
                 .then((spec) => {
                     types = spec.types;
                     return new TestFactory().create(spec)
@@ -62,8 +139,8 @@ module.exports = function() {
                     done(err))
         });
 
-        it('using no actions should create no test cases', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/no_action"))
+        it('create with no actions', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/declarations/no_action"))
                 .then((spec) => new TestFactory().create(spec))
                 .then((test)=> {
                     expect(test).to.not.be.eql(null);
@@ -75,8 +152,8 @@ module.exports = function() {
                     done(err))
         });
 
-        it('create a test case from multiple actions executions', (done) => {
-            Parser.parseFile(path.join(__dirname, "../inputs/multiple_actions_executions"))
+        it('create from multiple actions', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/executions/multiple_actions"))
                 .then((spec) => new TestFactory().create(spec))
                 .then((test)=> {
                     expect(test.test_cases).to.have.lengthOf(1);
@@ -86,6 +163,23 @@ module.exports = function() {
                 .catch((err) =>
                     done(err))
         });
+
+        it('create from action composition', (done) => {
+            Parser.parseFile(path.join(__dirname, "../inputs/declarations/action_composition"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    expect(test.test_cases).to.have.lengthOf(1);
+                    const test_case = test.test_cases[0];
+                    expect(test_case.test_case_actions).to.have.lengthOf(3);
+                    expect(test_case.test_case_actions[0].name).to.be.eql('go_to');
+                    expect(test_case.test_case_actions[1].name).to.be.eql('type');
+                    expect(test_case.test_case_actions[1].name).to.be.eql('type');
+
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
+        })
 
     });
 };
