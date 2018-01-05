@@ -1,12 +1,12 @@
 // Generated from C:/Users/jleveau/WebstormProjects/parser/grammar\BusinessRules.g4 by ANTLR 4.7
 // jshint ignore: start
-const Action = require('./nodes/actions/action');
-const Types = require('./nodes/types/types');
-const RegexType = require('./nodes/types/regex_type');
-const Spec = require('./nodes/spec');
+const Action = require('./elements/actions/action');
+const Types = require('./elements/types/types');
+const RegexType = require('./elements/types/regex_type');
+const Spec = require('./elements/spec');
 const antlr4 = require('antlr4/index');
-const action_natures = require('./nodes/actions/action_nature');
-const TypeActionEntry = require('./nodes/actions/type_action_entry');
+const action_natures = require('./elements/actions/action_nature');
+const TypeActionEntry = require('./elements/actions/type_action_entry');
 
 // This class defines a complete generic visitor for a parse tree produced by BusinessRulesParser.
 

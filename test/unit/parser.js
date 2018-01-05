@@ -2,10 +2,10 @@ const chai = require('chai');
 const expect = chai.expect;
 const path = require("path");
 const Parser = require('../../src/parser/parser');
-const action_natures = require("../../src/parser/nodes/actions/action_nature");
-const Types = require('../../src/parser/nodes/types/types');
-const Action = require("../../src/parser/nodes/actions/action");
-const TypeActionEntry = require("../../src/parser/nodes/actions/type_action_entry");
+const action_natures = require("../../src/parser/elements/actions/action_nature");
+const Types = require('../../src/parser/elements/types/types');
+const Action = require("../../src/parser/elements/actions/action");
+const TypeActionEntry = require("../../src/parser/elements/actions/type_action_entry");
 
 
 module.exports = function() {
