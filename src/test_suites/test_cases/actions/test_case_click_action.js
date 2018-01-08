@@ -3,7 +3,7 @@ const TestCaseAction = require('./test_case_action');
 class TestCaseClickAction extends TestCaseAction{
 
     constructor(target) {
-        super("click");
+        super();
         this.target = target;
     }
 

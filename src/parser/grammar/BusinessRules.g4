@@ -4,11 +4,20 @@ grammar BusinessRules;
  */
 
 /// TypesDescriptions
+word_type           :  WORD;
+boolean_type        :  BOOLEAN;
+number_type         :  NUMBER;
+alphanum_type       :  ALPHANUM;
 fixed_value_type    :  QUOTED_CONTENT;
 regex_type          :  REGEXP QUOTED_CONTENT;
-default_type        :  ALPHANUM | BOOLEAN | NUMBER | WORD;
 custom_type         :  IDENTIFIER;
-type_description    :  regex_type | default_type | custom_type | fixed_value_type;
+type_description    :  regex_type |
+                       word_type |
+                       boolean_type |
+                       number_type |
+                       alphanum_type |
+                       custom_type |
+                       fixed_value_type;
 
 /// TypeDeclaration
 type_declaration    : DEFINE IDENTIFIER AS type_description;
@@ -23,14 +32,12 @@ declared_entry      : IDENTIFIER;
 ///Verification
 verification_operation   : type_description;
 verification_operations  : verification_operation AND verification_operations |verification_operation;
-verification            : IDENTIFIER IS verification_operations;
-verifications           : verification AND verifications | verification;
 
 /// Actions
 type_action         : TYPE_ACTION entries;
 go_to_action        : GO_TO_ACTION url;
 click_action        : CLICK_ON IDENTIFIER;
-verify_action       : VERIFY verifications;
+verify_action       : VERIFY IDENTIFIER IS verification_operations;
 declared_action     : IDENTIFIER;
 
 step                : click_action | type_action | go_to_action | declared_action | verify_action;

@@ -3,7 +3,7 @@ const Action = require("../action");
 class TypeAction extends Action{
 
     constructor(entries = []) {
-        super('type');
+        super();
         this.entries = entries;
     }
 

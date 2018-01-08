@@ -3,7 +3,7 @@ const Action = require("./action");
 class GoToAction extends Action{
 
     constructor(url) {
-        super('go_to');
+        super();
         this.url = url;
     }
 

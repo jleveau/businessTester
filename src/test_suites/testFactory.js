@@ -1,4 +1,4 @@
-const BasicTestCaseFactory = require('./test_cases/basicTestCaseFactory');
+const BasicTestCaseFactory = require('./test_cases/factories/basicTestCase/basicTestCaseFactory');
 const Test = require('./test');
 const test_cases_factories = [BasicTestCaseFactory];
 

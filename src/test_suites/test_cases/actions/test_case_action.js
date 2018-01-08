@@ -1,7 +1,6 @@
 class TestCaseAction {
 
-    constructor(name) {
-        this.name = name;
+    constructor() {
     }
 
 }

@@ -1,8 +1,7 @@
 class Action{
 
-    constructor(name, steps)
+    constructor(steps=[])
     {
-        this.name = name;
         this.steps = steps;
     }
 

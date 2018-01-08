@@ -5,8 +5,49 @@ const path = require('path');
 const TestFactory = require('../../src/test_suites/testFactory');
 const Parser = require('../../src/parser/parser');
 const TestCase = require('../../src/test_suites/test_cases/test_case');
+const test_cases_actions_natures = require('../../src/test_suites/test_cases/actions/test_cases_actions_natures');
+const type_verification_operations = require('../../src/elements/actions/verify/verification_operations/verification_operations_natures');
+const types = require('../../src/elements/types/types');
 
 module.exports = function() {
+
+    describe('Types Operations', () => {
+        describe('Type Verification', () => {
+
+            it('should test word', (done) => {
+                let wordInstance = new types.WordType();
+                expect(wordInstance.match("myword")).to.be.eql(true);
+                expect(wordInstance.match("myword42")).to.be.eql(false);
+                expect(wordInstance.match("my word")).to.be.eql(false);
+                expect(wordInstance.match("")).to.be.eql(false);
+                done();
+            });
+
+            it('should test alphanumeric', (done) => {
+                let alphanumInstance = new types.AlphanumType();
+                expect(alphanumInstance.match("myword42")).to.be.eql(true);
+                expect(alphanumInstance.match("my word")).to.be.eql(false);
+                expect(alphanumInstance.match("")).to.be.eql(false);
+                done();
+            });
+
+            it('should test number', (done) => {
+                let numberInstance = new types.WordType();
+                expect(numberInstance.match("42")).to.be.eql(true);
+                expect(numberInstance.match("mword")).to.be.eql(false);
+                expect(numberInstance.match("")).to.be.eql(false);
+                done();
+            });
+
+            it('should test boolean', (done) => {
+                let booleanInstance = new types.WordType(true);
+                expect(booleanInstance.match(true)).to.be.eql();
+                expect(booleanInstance.match("true")).to.be.eql(false);
+                expect(booleanInstance.match()).to.be.eql(false);
+                done();
+            });
+        });
+    });
 
     describe('Basic Test Case', () => {
 
@@ -30,7 +71,7 @@ module.exports = function() {
 
                     const test_case = test.test_cases[0];
                     const action = test_case.test_case_actions[0];
-                    expect(action.name).to.be.eql("type");
+                    expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction);
                     expect(action.content).to.match(/^\w+$/);
                     done();
                 })
@@ -44,7 +85,7 @@ module.exports = function() {
                 .then((test)=> {
                     const test_case = test.test_cases[0];
                     const action = test_case.test_case_actions[0];
-                    expect(action.name).to.be.eql("type");
+                    expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction);
                     expect(action.content).to.match(/[a-zA-Z]+/);
                     done();
                 })
@@ -57,7 +98,7 @@ module.exports = function() {
                 .then((test)=> {
                     const test_case = test.test_cases[0];
                     const action = test_case.test_case_actions[0];
-                    expect(action.name).to.be.eql("type");
+                    expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction);
                     expect(parseInt(action.content)).to.not.be.eql(NaN);
                     done();
                 })
@@ -72,7 +113,7 @@ module.exports = function() {
                 .then((test)=> {
                     const test_case = test.test_cases[0];
                     const action = test_case.test_case_actions[0];
-                    expect(action.name).to.be.eql("type");
+                    expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction);
                     expect(typeof action.content).to.be.eql('boolean');
                     done();
                 })
@@ -86,7 +127,8 @@ module.exports = function() {
                 .then((test)=> {
                     const test_case = test.test_cases[0];
                     expect(test_case.test_case_actions).to.have.lengthOf(3);
-                    test_case.test_case_actions.forEach((action) => expect(action.name).to.be.eql('type'));
+                    test_case.test_case_actions.forEach((action) =>
+                        expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction));
                     done();
                 })
                 .catch((err) =>
@@ -99,7 +141,9 @@ module.exports = function() {
                 .then((test)=> {
                     const test_case = test.test_cases[0];
                     expect(test_case.test_case_actions).to.have.lengthOf(1);
-                    test_case.test_case_actions.forEach((action) => expect(action.name).to.be.eql('click'));
+                    test_case.test_case_actions.forEach((action) =>
+                        expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseClickAction)
+                    );
                     done();
                 })
                 .catch((err) =>
@@ -112,7 +156,9 @@ module.exports = function() {
                 .then((test)=> {
                     const test_case = test.test_cases[0];
                     expect(test_case.test_case_actions).to.have.lengthOf(1);
-                    test_case.test_case_actions.forEach((action) => expect(action.name).to.be.eql('go_to'));
+                    test_case.test_case_actions.forEach((action) =>
+                        expect(action).to.be.instanceOf(test_cases_actions_natures.TestCaseGoToAction)
+                    );
                     done();
                 })
                 .catch((err) =>
@@ -171,9 +217,9 @@ module.exports = function() {
                     expect(test.test_cases).to.have.lengthOf(1);
                     const test_case = test.test_cases[0];
                     expect(test_case.test_case_actions).to.have.lengthOf(3);
-                    expect(test_case.test_case_actions[0].name).to.be.eql('go_to');
-                    expect(test_case.test_case_actions[1].name).to.be.eql('type');
-                    expect(test_case.test_case_actions[1].name).to.be.eql('type');
+                    expect(test_case.test_case_actions[0]).to.be.instanceOf(test_cases_actions_natures.TestCaseGoToAction);
+                    expect(test_case.test_case_actions[1]).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction);
+                    expect(test_case.test_case_actions[2]).to.be.instanceOf(test_cases_actions_natures.TestCaseTypeAction);
 
                     done();
                 })
@@ -182,7 +228,23 @@ module.exports = function() {
         });
 
         it("should create a test_case with verifications actions", (done) => {
-            done(new Error('not implemented'))
+            Parser.parseFile(path.join(__dirname, "../inputs/action_natures/verification_action"))
+                .then((spec) => new TestFactory().create(spec))
+                .then((test)=> {
+                    expect(test.test_cases).to.have.lengthOf(1);
+                    const test_case = test.test_cases[0];
+                    expect(test_case.test_case_actions).to.have.lengthOf(1);
+                    expect(test_case.test_case_actions[0]).to.be.instanceOf(test_cases_actions_natures.TestCaseVerifyAction);
+
+                    const verify_action = test_case.test_case_actions[0];
+                    expect(verify_action.operation).to.be.instanceOf(type_verification_operations.TypeVerification);
+                    const verification_type = verify_action.operation.type_description;
+                    expect(verification_type).to.be.instanceOf(types.WordType);
+
+                    done();
+                })
+                .catch((err) =>
+                    done(err))
         });
 
     });

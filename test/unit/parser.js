@@ -2,11 +2,11 @@ const chai = require('chai');
 const expect = chai.expect;
 const path = require("path");
 const Parser = require('../../src/parser/parser');
-const action_natures = require("../../src/parser/elements/actions/action_nature");
-const Types = require('../../src/parser/elements/types/types');
-const Action = require("../../src/parser/elements/actions/action");
-const TypeActionEntry = require("../../src/parser/elements/actions/type/type_action_entry");
-
+const action_natures = require("../../src/elements/actions/action_natures");
+const Types = require('../../src/elements/types/types');
+const Action = require("../../src/elements/actions/action");
+const TypeActionEntry = require("../../src/elements/actions/type/type_action_entry");
+const verification_operations_natures = require("../../src/elements/actions/verify/verification_operations/verification_operations_natures");
 
 module.exports = function() {
 
@@ -92,9 +92,8 @@ module.exports = function() {
                     const type_action = action.steps[0];
                     const fixed_value_type = type_action.entries[0];
                     const entry_nature = fixed_value_type.content_nature;
-                    expect(entry_nature).to.be.instanceOf(Types.FixedValueType);
 
-                    expect(entry_nature.name).to.be.eql("fixed");
+                    expect(entry_nature).to.be.instanceOf(Types.FixedValueType);
                     expect(entry_nature.value).to.be.eql("12");
 
                     done();
@@ -199,7 +198,7 @@ module.exports = function() {
                         expect(type_entry).to.be.instanceOf(TypeActionEntry);
 
                         expect(type_entry.target).to.be.eql("login");
-                        expect(type_entry.content_nature).to.be.eql("alphanumeric");
+                        expect(type_entry.content_nature).to.be.instanceOf(Types.AlphanumType);
                         done();
                     })
                     .catch((err) => done(err))
@@ -262,14 +261,15 @@ module.exports = function() {
         });
 
         describe("Verify Action", () => {
-            it.only("should create a verification action", (done) => {
+            it("should create a verification action", (done) => {
                 Parser.parseFile(path.join(__dirname, '../inputs/action_natures/verification_action')).then((spec) => {
                     expect(spec.actions).to.have.lengthOf(1);
                     const action = spec.actions.find((action) => action.name === "check_valid_output");
                     const verification_action = action.steps[0];
                     expect(verification_action).to.be.instanceOf(action_natures.VerificationAction);
-                    expect(verification_action.target).to.be.eql("output");
-                    expect(verification_action.content_nature).to.be.eql('Action');
+                    expect(verification_action.operation).to.be.instanceOf(verification_operations_natures.TypeVerification);
+                    const type_verification = verification_action.operation;
+                    expect(type_verification.type_description).to.be.instanceOf(Types.WordType);
                     done();
                 })
                     .catch((err) => done(err))
