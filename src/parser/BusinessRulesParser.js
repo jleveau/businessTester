@@ -4,97 +4,119 @@ var antlr4 = require('antlr4/index');
 var grammarFileName = "BusinessRules.g4";
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u001e\u00a7\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
+    "\u0003\u001f\u00c9\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
     "\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007",
     "\u0004\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f",
     "\u0004\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010",
     "\u0004\u0011\t\u0011\u0004\u0012\t\u0012\u0004\u0013\t\u0013\u0004\u0014",
     "\t\u0014\u0004\u0015\t\u0015\u0004\u0016\t\u0016\u0004\u0017\t\u0017",
     "\u0004\u0018\t\u0018\u0004\u0019\t\u0019\u0004\u001a\t\u001a\u0004\u001b",
-    "\t\u001b\u0004\u001c\t\u001c\u0003\u0002\u0003\u0002\u0003\u0003\u0003",
-    "\u0003\u0003\u0003\u0003\u0004\u0003\u0004\u0003\u0005\u0003\u0005\u0003",
-    "\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0005\u0006F\n\u0006\u0003",
-    "\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\b\u0003",
-    "\b\u0003\b\u0007\bP\n\b\f\b\u000e\bS\u000b\b\u0003\t\u0003\t\u0003\n",
-    "\u0003\n\u0003\n\u0003\n\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b",
-    "\u0003\u000b\u0003\u000b\u0005\u000ba\n\u000b\u0003\f\u0003\f\u0003",
-    "\r\u0003\r\u0003\r\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000f\u0003",
-    "\u000f\u0003\u000f\u0003\u0010\u0003\u0010\u0003\u0011\u0003\u0011\u0003",
-    "\u0011\u0003\u0011\u0005\u0011t\n\u0011\u0003\u0012\u0003\u0012\u0003",
-    "\u0012\u0003\u0012\u0003\u0012\u0005\u0012{\n\u0012\u0003\u0013\u0003",
-    "\u0013\u0003\u0013\u0003\u0013\u0003\u0013\u0003\u0014\u0003\u0014\u0003",
-    "\u0014\u0003\u0014\u0005\u0014\u0086\n\u0014\u0003\u0015\u0003\u0015",
-    "\u0003\u0015\u0003\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0005\u0016",
-    "\u008f\n\u0016\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003",
-    "\u0017\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0005\u0018\u009a",
-    "\n\u0018\u0003\u0019\u0003\u0019\u0003\u0019\u0003\u0019\u0003\u001a",
-    "\u0003\u001a\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001c\u0003\u001c",
-    "\u0003\u001c\u0002\u0003\u000e\u001d\u0002\u0004\u0006\b\n\f\u000e\u0010",
-    "\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.0246\u0002\u0003",
-    "\u0003\u0002\u0007\n\u0002\u0098\u00028\u0003\u0002\u0002\u0002\u0004",
-    ":\u0003\u0002\u0002\u0002\u0006=\u0003\u0002\u0002\u0002\b?\u0003\u0002",
-    "\u0002\u0002\nE\u0003\u0002\u0002\u0002\fG\u0003\u0002\u0002\u0002\u000e",
-    "L\u0003\u0002\u0002\u0002\u0010T\u0003\u0002\u0002\u0002\u0012V\u0003",
-    "\u0002\u0002\u0002\u0014`\u0003\u0002\u0002\u0002\u0016b\u0003\u0002",
-    "\u0002\u0002\u0018d\u0003\u0002\u0002\u0002\u001ag\u0003\u0002\u0002",
-    "\u0002\u001cj\u0003\u0002\u0002\u0002\u001em\u0003\u0002\u0002\u0002",
-    " s\u0003\u0002\u0002\u0002\"z\u0003\u0002\u0002\u0002$|\u0003\u0002",
-    "\u0002\u0002&\u0085\u0003\u0002\u0002\u0002(\u0087\u0003\u0002\u0002",
-    "\u0002*\u008e\u0003\u0002\u0002\u0002,\u0090\u0003\u0002\u0002\u0002",
-    ".\u0099\u0003\u0002\u0002\u00020\u009b\u0003\u0002\u0002\u00022\u009f",
-    "\u0003\u0002\u0002\u00024\u00a1\u0003\u0002\u0002\u00026\u00a4\u0003",
-    "\u0002\u0002\u000289\u0007\u001c\u0002\u00029\u0003\u0003\u0002\u0002",
-    "\u0002:;\u0007\u0005\u0002\u0002;<\u0007\u001c\u0002\u0002<\u0005\u0003",
-    "\u0002\u0002\u0002=>\t\u0002\u0002\u0002>\u0007\u0003\u0002\u0002\u0002",
-    "?@\u0007\u001d\u0002\u0002@\t\u0003\u0002\u0002\u0002AF\u0005\u0004",
-    "\u0003\u0002BF\u0005\u0006\u0004\u0002CF\u0005\b\u0005\u0002DF\u0005",
-    "\u0002\u0002\u0002EA\u0003\u0002\u0002\u0002EB\u0003\u0002\u0002\u0002",
-    "EC\u0003\u0002\u0002\u0002ED\u0003\u0002\u0002\u0002F\u000b\u0003\u0002",
-    "\u0002\u0002GH\u0007\u0006\u0002\u0002HI\u0007\u001d\u0002\u0002IJ\u0007",
-    "\u000f\u0002\u0002JK\u0005\n\u0006\u0002K\r\u0003\u0002\u0002\u0002",
-    "LQ\b\b\u0001\u0002MN\f\u0004\u0002\u0002NP\u0005\f\u0007\u0002OM\u0003",
-    "\u0002\u0002\u0002PS\u0003\u0002\u0002\u0002QO\u0003\u0002\u0002\u0002",
-    "QR\u0003\u0002\u0002\u0002R\u000f\u0003\u0002\u0002\u0002SQ\u0003\u0002",
-    "\u0002\u0002TU\u0005\n\u0006\u0002U\u0011\u0003\u0002\u0002\u0002VW",
-    "\u0007\u001d\u0002\u0002WX\u0007\u000f\u0002\u0002XY\u0005\u0010\t\u0002",
-    "Y\u0013\u0003\u0002\u0002\u0002Z[\u0005\u0012\n\u0002[\\\u0007\u001b",
-    "\u0002\u0002\\]\u0005\u0014\u000b\u0002]a\u0003\u0002\u0002\u0002^a",
-    "\u0005\u0012\n\u0002_a\u0005\u0016\f\u0002`Z\u0003\u0002\u0002\u0002",
-    "`^\u0003\u0002\u0002\u0002`_\u0003\u0002\u0002\u0002a\u0015\u0003\u0002",
-    "\u0002\u0002bc\u0007\u001d\u0002\u0002c\u0017\u0003\u0002\u0002\u0002",
-    "de\u0007\u0012\u0002\u0002ef\u0005\u0014\u000b\u0002f\u0019\u0003\u0002",
-    "\u0002\u0002gh\u0007\u000b\u0002\u0002hi\u00056\u001c\u0002i\u001b\u0003",
-    "\u0002\u0002\u0002jk\u0007\f\u0002\u0002kl\u0007\u001d\u0002\u0002l",
-    "\u001d\u0003\u0002\u0002\u0002mn\u0007\u001d\u0002\u0002n\u001f\u0003",
-    "\u0002\u0002\u0002ot\u0005\u001c\u000f\u0002pt\u0005\u0018\r\u0002q",
-    "t\u0005\u001a\u000e\u0002rt\u0005\u001e\u0010\u0002so\u0003\u0002\u0002",
-    "\u0002sp\u0003\u0002\u0002\u0002sq\u0003\u0002\u0002\u0002sr\u0003\u0002",
-    "\u0002\u0002t!\u0003\u0002\u0002\u0002u{\u0005 \u0011\u0002vw\u0005",
-    " \u0011\u0002wx\u0007\u0014\u0002\u0002xy\u0005\"\u0012\u0002y{\u0003",
-    "\u0002\u0002\u0002zu\u0003\u0002\u0002\u0002zv\u0003\u0002\u0002\u0002",
-    "{#\u0003\u0002\u0002\u0002|}\u0007\r\u0002\u0002}~\u0007\u001d\u0002",
-    "\u0002~\u007f\u0007\u0011\u0002\u0002\u007f\u0080\u0005\"\u0012\u0002",
-    "\u0080%\u0003\u0002\u0002\u0002\u0081\u0082\u0005$\u0013\u0002\u0082",
-    "\u0083\u0005&\u0014\u0002\u0083\u0086\u0003\u0002\u0002\u0002\u0084",
-    "\u0086\u0003\u0002\u0002\u0002\u0085\u0081\u0003\u0002\u0002\u0002\u0085",
-    "\u0084\u0003\u0002\u0002\u0002\u0086\'\u0003\u0002\u0002\u0002\u0087",
-    "\u0088\u0007\u000e\u0002\u0002\u0088\u0089\u0005\u001e\u0010\u0002\u0089",
-    ")\u0003\u0002\u0002\u0002\u008a\u008b\u0005(\u0015\u0002\u008b\u008c",
-    "\u0005*\u0016\u0002\u008c\u008f\u0003\u0002\u0002\u0002\u008d\u008f",
-    "\u0003\u0002\u0002\u0002\u008e\u008a\u0003\u0002\u0002\u0002\u008e\u008d",
-    "\u0003\u0002\u0002\u0002\u008f+\u0003\u0002\u0002\u0002\u0090\u0091",
-    "\u0007\u0015\u0002\u0002\u0091\u0092\u0007\u001d\u0002\u0002\u0092\u0093",
-    "\u0007\u0010\u0002\u0002\u0093\u0094\u0005\u0014\u000b\u0002\u0094-",
-    "\u0003\u0002\u0002\u0002\u0095\u0096\u0005,\u0017\u0002\u0096\u0097",
-    "\u0005.\u0018\u0002\u0097\u009a\u0003\u0002\u0002\u0002\u0098\u009a",
-    "\u0003\u0002\u0002\u0002\u0099\u0095\u0003\u0002\u0002\u0002\u0099\u0098",
-    "\u0003\u0002\u0002\u0002\u009a/\u0003\u0002\u0002\u0002\u009b\u009c",
-    "\u0005.\u0018\u0002\u009c\u009d\u0005\u000e\b\u0002\u009d\u009e\u0005",
-    "&\u0014\u0002\u009e1\u0003\u0002\u0002\u0002\u009f\u00a0\u0005*\u0016",
-    "\u0002\u00a03\u0003\u0002\u0002\u0002\u00a1\u00a2\u00050\u0019\u0002",
-    "\u00a2\u00a3\u00052\u001a\u0002\u00a35\u0003\u0002\u0002\u0002\u00a4",
-    "\u00a5\u0007\u001c\u0002\u0002\u00a57\u0003\u0002\u0002\u0002\nEQ`s",
-    "z\u0085\u008e\u0099"].join("");
+    "\t\u001b\u0004\u001c\t\u001c\u0004\u001d\t\u001d\u0004\u001e\t\u001e",
+    "\u0004\u001f\t\u001f\u0004 \t \u0004!\t!\u0003\u0002\u0003\u0002\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004\u0003\u0005\u0003",
+    "\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0005\u0006P",
+    "\n\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007",
+    "\u0003\b\u0003\b\u0003\b\u0007\bZ\n\b\f\b\u000e\b]\u000b\b\u0003\t\u0003",
+    "\t\u0003\n\u0003\n\u0003\n\u0003\n\u0003\u000b\u0003\u000b\u0003\u000b",
+    "\u0003\u000b\u0003\u000b\u0003\u000b\u0005\u000bk\n\u000b\u0003\f\u0003",
+    "\f\u0003\r\u0003\r\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0003",
+    "\u000e\u0005\u000ev\n\u000e\u0003\u000f\u0003\u000f\u0003\u000f\u0003",
+    "\u000f\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0005",
+    "\u0010\u0081\n\u0010\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0012",
+    "\u0003\u0012\u0003\u0012\u0003\u0013\u0003\u0013\u0003\u0013\u0003\u0014",
+    "\u0003\u0014\u0003\u0014\u0003\u0015\u0003\u0015\u0003\u0016\u0003\u0016",
+    "\u0003\u0016\u0003\u0016\u0003\u0016\u0005\u0016\u0096\n\u0016\u0003",
+    "\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0005\u0017\u009d",
+    "\n\u0017\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018",
+    "\u0003\u0019\u0003\u0019\u0003\u0019\u0003\u0019\u0005\u0019\u00a8\n",
+    "\u0019\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001b\u0003\u001b\u0003",
+    "\u001b\u0003\u001b\u0005\u001b\u00b1\n\u001b\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001d\u0003\u001d\u0003\u001d",
+    "\u0003\u001d\u0005\u001d\u00bc\n\u001d\u0003\u001e\u0003\u001e\u0003",
+    "\u001e\u0003\u001e\u0003\u001f\u0003\u001f\u0003 \u0003 \u0003 \u0003",
+    "!\u0003!\u0003!\u0002\u0003\u000e\"\u0002\u0004\u0006\b\n\f\u000e\u0010",
+    "\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@\u0002\u0003",
+    "\u0003\u0002\u0007\n\u0002\u00b8\u0002B\u0003\u0002\u0002\u0002\u0004",
+    "D\u0003\u0002\u0002\u0002\u0006G\u0003\u0002\u0002\u0002\bI\u0003\u0002",
+    "\u0002\u0002\nO\u0003\u0002\u0002\u0002\fQ\u0003\u0002\u0002\u0002\u000e",
+    "V\u0003\u0002\u0002\u0002\u0010^\u0003\u0002\u0002\u0002\u0012`\u0003",
+    "\u0002\u0002\u0002\u0014j\u0003\u0002\u0002\u0002\u0016l\u0003\u0002",
+    "\u0002\u0002\u0018n\u0003\u0002\u0002\u0002\u001au\u0003\u0002\u0002",
+    "\u0002\u001cw\u0003\u0002\u0002\u0002\u001e\u0080\u0003\u0002\u0002",
+    "\u0002 \u0082\u0003\u0002\u0002\u0002\"\u0085\u0003\u0002\u0002\u0002",
+    "$\u0088\u0003\u0002\u0002\u0002&\u008b\u0003\u0002\u0002\u0002(\u008e",
+    "\u0003\u0002\u0002\u0002*\u0095\u0003\u0002\u0002\u0002,\u009c\u0003",
+    "\u0002\u0002\u0002.\u009e\u0003\u0002\u0002\u00020\u00a7\u0003\u0002",
+    "\u0002\u00022\u00a9\u0003\u0002\u0002\u00024\u00b0\u0003\u0002\u0002",
+    "\u00026\u00b2\u0003\u0002\u0002\u00028\u00bb\u0003\u0002\u0002\u0002",
+    ":\u00bd\u0003\u0002\u0002\u0002<\u00c1\u0003\u0002\u0002\u0002>\u00c3",
+    "\u0003\u0002\u0002\u0002@\u00c6\u0003\u0002\u0002\u0002BC\u0007\u001d",
+    "\u0002\u0002C\u0003\u0003\u0002\u0002\u0002DE\u0007\u0005\u0002\u0002",
+    "EF\u0007\u001d\u0002\u0002F\u0005\u0003\u0002\u0002\u0002GH\t\u0002",
+    "\u0002\u0002H\u0007\u0003\u0002\u0002\u0002IJ\u0007\u001e\u0002\u0002",
+    "J\t\u0003\u0002\u0002\u0002KP\u0005\u0004\u0003\u0002LP\u0005\u0006",
+    "\u0004\u0002MP\u0005\b\u0005\u0002NP\u0005\u0002\u0002\u0002OK\u0003",
+    "\u0002\u0002\u0002OL\u0003\u0002\u0002\u0002OM\u0003\u0002\u0002\u0002",
+    "ON\u0003\u0002\u0002\u0002P\u000b\u0003\u0002\u0002\u0002QR\u0007\u0006",
+    "\u0002\u0002RS\u0007\u001e\u0002\u0002ST\u0007\u000f\u0002\u0002TU\u0005",
+    "\n\u0006\u0002U\r\u0003\u0002\u0002\u0002V[\b\b\u0001\u0002WX\f\u0004",
+    "\u0002\u0002XZ\u0005\f\u0007\u0002YW\u0003\u0002\u0002\u0002Z]\u0003",
+    "\u0002\u0002\u0002[Y\u0003\u0002\u0002\u0002[\\\u0003\u0002\u0002\u0002",
+    "\\\u000f\u0003\u0002\u0002\u0002][\u0003\u0002\u0002\u0002^_\u0005\n",
+    "\u0006\u0002_\u0011\u0003\u0002\u0002\u0002`a\u0007\u001e\u0002\u0002",
+    "ab\u0007\u000f\u0002\u0002bc\u0005\u0010\t\u0002c\u0013\u0003\u0002",
+    "\u0002\u0002de\u0005\u0012\n\u0002ef\u0007\u001c\u0002\u0002fg\u0005",
+    "\u0014\u000b\u0002gk\u0003\u0002\u0002\u0002hk\u0005\u0012\n\u0002i",
+    "k\u0005\u0016\f\u0002jd\u0003\u0002\u0002\u0002jh\u0003\u0002\u0002",
+    "\u0002ji\u0003\u0002\u0002\u0002k\u0015\u0003\u0002\u0002\u0002lm\u0007",
+    "\u001e\u0002\u0002m\u0017\u0003\u0002\u0002\u0002no\u0005\n\u0006\u0002",
+    "o\u0019\u0003\u0002\u0002\u0002pq\u0005\u0018\r\u0002qr\u0007\u0015",
+    "\u0002\u0002rs\u0005\u001a\u000e\u0002sv\u0003\u0002\u0002\u0002tv\u0005",
+    "\u0018\r\u0002up\u0003\u0002\u0002\u0002ut\u0003\u0002\u0002\u0002v",
+    "\u001b\u0003\u0002\u0002\u0002wx\u0007\u001e\u0002\u0002xy\u0007\u0010",
+    "\u0002\u0002yz\u0005\u001a\u000e\u0002z\u001d\u0003\u0002\u0002\u0002",
+    "{|\u0005\u001c\u000f\u0002|}\u0007\u0015\u0002\u0002}~\u0005\u001e\u0010",
+    "\u0002~\u0081\u0003\u0002\u0002\u0002\u007f\u0081\u0005\u001c\u000f",
+    "\u0002\u0080{\u0003\u0002\u0002\u0002\u0080\u007f\u0003\u0002\u0002",
+    "\u0002\u0081\u001f\u0003\u0002\u0002\u0002\u0082\u0083\u0007\u0013\u0002",
+    "\u0002\u0083\u0084\u0005\u0014\u000b\u0002\u0084!\u0003\u0002\u0002",
+    "\u0002\u0085\u0086\u0007\u000b\u0002\u0002\u0086\u0087\u0005@!\u0002",
+    "\u0087#\u0003\u0002\u0002\u0002\u0088\u0089\u0007\f\u0002\u0002\u0089",
+    "\u008a\u0007\u001e\u0002\u0002\u008a%\u0003\u0002\u0002\u0002\u008b",
+    "\u008c\u0007\u0011\u0002\u0002\u008c\u008d\u0005\u001e\u0010\u0002\u008d",
+    "\'\u0003\u0002\u0002\u0002\u008e\u008f\u0007\u001e\u0002\u0002\u008f",
+    ")\u0003\u0002\u0002\u0002\u0090\u0096\u0005$\u0013\u0002\u0091\u0096",
+    "\u0005 \u0011\u0002\u0092\u0096\u0005\"\u0012\u0002\u0093\u0096\u0005",
+    "(\u0015\u0002\u0094\u0096\u0005&\u0014\u0002\u0095\u0090\u0003\u0002",
+    "\u0002\u0002\u0095\u0091\u0003\u0002\u0002\u0002\u0095\u0092\u0003\u0002",
+    "\u0002\u0002\u0095\u0093\u0003\u0002\u0002\u0002\u0095\u0094\u0003\u0002",
+    "\u0002\u0002\u0096+\u0003\u0002\u0002\u0002\u0097\u009d\u0005*\u0016",
+    "\u0002\u0098\u0099\u0005*\u0016\u0002\u0099\u009a\u0007\u0015\u0002",
+    "\u0002\u009a\u009b\u0005,\u0017\u0002\u009b\u009d\u0003\u0002\u0002",
+    "\u0002\u009c\u0097\u0003\u0002\u0002\u0002\u009c\u0098\u0003\u0002\u0002",
+    "\u0002\u009d-\u0003\u0002\u0002\u0002\u009e\u009f\u0007\r\u0002\u0002",
+    "\u009f\u00a0\u0007\u001e\u0002\u0002\u00a0\u00a1\u0007\u0012\u0002\u0002",
+    "\u00a1\u00a2\u0005,\u0017\u0002\u00a2/\u0003\u0002\u0002\u0002\u00a3",
+    "\u00a4\u0005.\u0018\u0002\u00a4\u00a5\u00050\u0019\u0002\u00a5\u00a8",
+    "\u0003\u0002\u0002\u0002\u00a6\u00a8\u0003\u0002\u0002\u0002\u00a7\u00a3",
+    "\u0003\u0002\u0002\u0002\u00a7\u00a6\u0003\u0002\u0002\u0002\u00a81",
+    "\u0003\u0002\u0002\u0002\u00a9\u00aa\u0007\u000e\u0002\u0002\u00aa\u00ab",
+    "\u0005(\u0015\u0002\u00ab3\u0003\u0002\u0002\u0002\u00ac\u00ad\u0005",
+    "2\u001a\u0002\u00ad\u00ae\u00054\u001b\u0002\u00ae\u00b1\u0003\u0002",
+    "\u0002\u0002\u00af\u00b1\u0003\u0002\u0002\u0002\u00b0\u00ac\u0003\u0002",
+    "\u0002\u0002\u00b0\u00af\u0003\u0002\u0002\u0002\u00b15\u0003\u0002",
+    "\u0002\u0002\u00b2\u00b3\u0007\u0016\u0002\u0002\u00b3\u00b4\u0007\u001e",
+    "\u0002\u0002\u00b4\u00b5\u0007\u000f\u0002\u0002\u00b5\u00b6\u0005\u0014",
+    "\u000b\u0002\u00b67\u0003\u0002\u0002\u0002\u00b7\u00b8\u00056\u001c",
+    "\u0002\u00b8\u00b9\u00058\u001d\u0002\u00b9\u00bc\u0003\u0002\u0002",
+    "\u0002\u00ba\u00bc\u0003\u0002\u0002\u0002\u00bb\u00b7\u0003\u0002\u0002",
+    "\u0002\u00bb\u00ba\u0003\u0002\u0002\u0002\u00bc9\u0003\u0002\u0002",
+    "\u0002\u00bd\u00be\u00058\u001d\u0002\u00be\u00bf\u0005\u000e\b\u0002",
+    "\u00bf\u00c0\u00050\u0019\u0002\u00c0;\u0003\u0002\u0002\u0002\u00c1",
+    "\u00c2\u00054\u001b\u0002\u00c2=\u0003\u0002\u0002\u0002\u00c3\u00c4",
+    "\u0005:\u001e\u0002\u00c4\u00c5\u0005<\u001f\u0002\u00c5?\u0003\u0002",
+    "\u0002\u0002\u00c6\u00c7\u0007\u001d\u0002\u0002\u00c7A\u0003\u0002",
+    "\u0002\u0002\fO[ju\u0080\u0095\u009c\u00a7\u00b0\u00bb"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -105,22 +127,24 @@ var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, null, null, "'regexp'", "'define'", "'alphanumeric'", 
                      "'boolean'", "'number'", "'word'", "'go to'", "'click on'", 
-                     "'to'", "'do'", "'as'", "'is'", "'you must'", "'type'", 
-                     "'then'", "'and'", "'entry'", "';'", "'{'", "'}'", 
-                     "'set'", "':'", "','" ];
+                     "'to'", "'do'", "'as'", "'is'", "'verify'", "'you must'", 
+                     "'type'", "'then'", "'and'", "'entry'", "';'", "'{'", 
+                     "'}'", "'set'", "':'", "','" ];
 
 var symbolicNames = [ null, "SKIPED", "LINE_JOINING", "REGEXP", "DEFINE", 
                       "ALPHANUM", "BOOLEAN", "NUMBER", "WORD", "GO_TO_ACTION", 
-                      "CLICK_ON", "TO", "DO", "AS", "IS", "YOU_MUST", "TYPE_ACTION", 
-                      "THEN", "AND", "ENTRY", "SEMICOLON", "L_BRACE", "R_BRACE", 
-                      "SET", "TWO_DOT", "COMA", "QUOTED_CONTENT", "IDENTIFIER", 
-                      "WHITESPACE" ];
+                      "CLICK_ON", "TO", "DO", "AS", "IS", "VERIFY", "YOU_MUST", 
+                      "TYPE_ACTION", "THEN", "AND", "ENTRY", "SEMICOLON", 
+                      "L_BRACE", "R_BRACE", "SET", "TWO_DOT", "COMA", "QUOTED_CONTENT", 
+                      "IDENTIFIER", "WHITESPACE" ];
 
 var ruleNames =  [ "fixed_value_type", "regex_type", "default_type", "custom_type", 
                    "type_description", "type_declaration", "type_declarations", 
                    "entry_value", "entry", "entries", "declared_entry", 
-                   "type_action", "go_to_action", "click_action", "declared_action", 
-                   "step", "steps", "action_declaration", "action_declarations", 
+                   "verification_operation", "verification_operations", 
+                   "verification", "verifications", "type_action", "go_to_action", 
+                   "click_action", "verify_action", "declared_action", "step", 
+                   "steps", "action_declaration", "action_declarations", 
                    "execute_action", "execute_actions", "entry_declaration", 
                    "entry_declarations", "declarations", "executions", "main", 
                    "url" ];
@@ -158,20 +182,21 @@ BusinessRulesParser.TO = 11;
 BusinessRulesParser.DO = 12;
 BusinessRulesParser.AS = 13;
 BusinessRulesParser.IS = 14;
-BusinessRulesParser.YOU_MUST = 15;
-BusinessRulesParser.TYPE_ACTION = 16;
-BusinessRulesParser.THEN = 17;
-BusinessRulesParser.AND = 18;
-BusinessRulesParser.ENTRY = 19;
-BusinessRulesParser.SEMICOLON = 20;
-BusinessRulesParser.L_BRACE = 21;
-BusinessRulesParser.R_BRACE = 22;
-BusinessRulesParser.SET = 23;
-BusinessRulesParser.TWO_DOT = 24;
-BusinessRulesParser.COMA = 25;
-BusinessRulesParser.QUOTED_CONTENT = 26;
-BusinessRulesParser.IDENTIFIER = 27;
-BusinessRulesParser.WHITESPACE = 28;
+BusinessRulesParser.VERIFY = 15;
+BusinessRulesParser.YOU_MUST = 16;
+BusinessRulesParser.TYPE_ACTION = 17;
+BusinessRulesParser.THEN = 18;
+BusinessRulesParser.AND = 19;
+BusinessRulesParser.ENTRY = 20;
+BusinessRulesParser.SEMICOLON = 21;
+BusinessRulesParser.L_BRACE = 22;
+BusinessRulesParser.R_BRACE = 23;
+BusinessRulesParser.SET = 24;
+BusinessRulesParser.TWO_DOT = 25;
+BusinessRulesParser.COMA = 26;
+BusinessRulesParser.QUOTED_CONTENT = 27;
+BusinessRulesParser.IDENTIFIER = 28;
+BusinessRulesParser.WHITESPACE = 29;
 
 BusinessRulesParser.RULE_fixed_value_type = 0;
 BusinessRulesParser.RULE_regex_type = 1;
@@ -184,22 +209,27 @@ BusinessRulesParser.RULE_entry_value = 7;
 BusinessRulesParser.RULE_entry = 8;
 BusinessRulesParser.RULE_entries = 9;
 BusinessRulesParser.RULE_declared_entry = 10;
-BusinessRulesParser.RULE_type_action = 11;
-BusinessRulesParser.RULE_go_to_action = 12;
-BusinessRulesParser.RULE_click_action = 13;
-BusinessRulesParser.RULE_declared_action = 14;
-BusinessRulesParser.RULE_step = 15;
-BusinessRulesParser.RULE_steps = 16;
-BusinessRulesParser.RULE_action_declaration = 17;
-BusinessRulesParser.RULE_action_declarations = 18;
-BusinessRulesParser.RULE_execute_action = 19;
-BusinessRulesParser.RULE_execute_actions = 20;
-BusinessRulesParser.RULE_entry_declaration = 21;
-BusinessRulesParser.RULE_entry_declarations = 22;
-BusinessRulesParser.RULE_declarations = 23;
-BusinessRulesParser.RULE_executions = 24;
-BusinessRulesParser.RULE_main = 25;
-BusinessRulesParser.RULE_url = 26;
+BusinessRulesParser.RULE_verification_operation = 11;
+BusinessRulesParser.RULE_verification_operations = 12;
+BusinessRulesParser.RULE_verification = 13;
+BusinessRulesParser.RULE_verifications = 14;
+BusinessRulesParser.RULE_type_action = 15;
+BusinessRulesParser.RULE_go_to_action = 16;
+BusinessRulesParser.RULE_click_action = 17;
+BusinessRulesParser.RULE_verify_action = 18;
+BusinessRulesParser.RULE_declared_action = 19;
+BusinessRulesParser.RULE_step = 20;
+BusinessRulesParser.RULE_steps = 21;
+BusinessRulesParser.RULE_action_declaration = 22;
+BusinessRulesParser.RULE_action_declarations = 23;
+BusinessRulesParser.RULE_execute_action = 24;
+BusinessRulesParser.RULE_execute_actions = 25;
+BusinessRulesParser.RULE_entry_declaration = 26;
+BusinessRulesParser.RULE_entry_declarations = 27;
+BusinessRulesParser.RULE_declarations = 28;
+BusinessRulesParser.RULE_executions = 29;
+BusinessRulesParser.RULE_main = 30;
+BusinessRulesParser.RULE_url = 31;
 
 function Fixed_value_typeContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -232,7 +262,7 @@ BusinessRulesParser.prototype.fixed_value_type = function() {
     this.enterRule(localctx, 0, BusinessRulesParser.RULE_fixed_value_type);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 54;
+        this.state = 64;
         this.match(BusinessRulesParser.QUOTED_CONTENT);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -283,9 +313,9 @@ BusinessRulesParser.prototype.regex_type = function() {
     this.enterRule(localctx, 2, BusinessRulesParser.RULE_regex_type);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 56;
+        this.state = 66;
         this.match(BusinessRulesParser.REGEXP);
-        this.state = 57;
+        this.state = 67;
         this.match(BusinessRulesParser.QUOTED_CONTENT);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -345,7 +375,7 @@ BusinessRulesParser.prototype.default_type = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 59;
+        this.state = 69;
         _la = this._input.LA(1);
         if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << BusinessRulesParser.ALPHANUM) | (1 << BusinessRulesParser.BOOLEAN) | (1 << BusinessRulesParser.NUMBER) | (1 << BusinessRulesParser.WORD))) !== 0))) {
         this._errHandler.recoverInline(this);
@@ -399,7 +429,7 @@ BusinessRulesParser.prototype.custom_type = function() {
     this.enterRule(localctx, 6, BusinessRulesParser.RULE_custom_type);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 61;
+        this.state = 71;
         this.match(BusinessRulesParser.IDENTIFIER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -457,12 +487,12 @@ BusinessRulesParser.prototype.type_description = function() {
     var localctx = new Type_descriptionContext(this, this._ctx, this.state);
     this.enterRule(localctx, 8, BusinessRulesParser.RULE_type_description);
     try {
-        this.state = 67;
+        this.state = 77;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case BusinessRulesParser.REGEXP:
             this.enterOuterAlt(localctx, 1);
-            this.state = 63;
+            this.state = 73;
             this.regex_type();
             break;
         case BusinessRulesParser.ALPHANUM:
@@ -470,17 +500,17 @@ BusinessRulesParser.prototype.type_description = function() {
         case BusinessRulesParser.NUMBER:
         case BusinessRulesParser.WORD:
             this.enterOuterAlt(localctx, 2);
-            this.state = 64;
+            this.state = 74;
             this.default_type();
             break;
         case BusinessRulesParser.IDENTIFIER:
             this.enterOuterAlt(localctx, 3);
-            this.state = 65;
+            this.state = 75;
             this.custom_type();
             break;
         case BusinessRulesParser.QUOTED_CONTENT:
             this.enterOuterAlt(localctx, 4);
-            this.state = 66;
+            this.state = 76;
             this.fixed_value_type();
             break;
         default:
@@ -543,13 +573,13 @@ BusinessRulesParser.prototype.type_declaration = function() {
     this.enterRule(localctx, 10, BusinessRulesParser.RULE_type_declaration);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 69;
+        this.state = 79;
         this.match(BusinessRulesParser.DEFINE);
-        this.state = 70;
+        this.state = 80;
         this.match(BusinessRulesParser.IDENTIFIER);
-        this.state = 71;
+        this.state = 81;
         this.match(BusinessRulesParser.AS);
-        this.state = 72;
+        this.state = 82;
         this.type_description();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -604,7 +634,7 @@ BusinessRulesParser.prototype.type_declarations = function(_p) {
     try {
         this.enterOuterAlt(localctx, 1);
         this._ctx.stop = this._input.LT(-1);
-        this.state = 79;
+        this.state = 89;
         this._errHandler.sync(this);
         var _alt = this._interp.adaptivePredict(this._input,1,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
@@ -615,14 +645,14 @@ BusinessRulesParser.prototype.type_declarations = function(_p) {
                 _prevctx = localctx;
                 localctx = new Type_declarationsContext(this, _parentctx, _parentState);
                 this.pushNewRecursionContext(localctx, _startState, BusinessRulesParser.RULE_type_declarations);
-                this.state = 75;
+                this.state = 85;
                 if (!( this.precpred(this._ctx, 2))) {
                     throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 2)");
                 }
-                this.state = 76;
+                this.state = 86;
                 this.type_declaration(); 
             }
-            this.state = 81;
+            this.state = 91;
             this._errHandler.sync(this);
             _alt = this._interp.adaptivePredict(this._input,1,this._ctx);
         }
@@ -672,7 +702,7 @@ BusinessRulesParser.prototype.entry_value = function() {
     this.enterRule(localctx, 14, BusinessRulesParser.RULE_entry_value);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 82;
+        this.state = 92;
         this.type_description();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -727,11 +757,11 @@ BusinessRulesParser.prototype.entry = function() {
     this.enterRule(localctx, 16, BusinessRulesParser.RULE_entry);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 84;
+        this.state = 94;
         this.match(BusinessRulesParser.IDENTIFIER);
-        this.state = 85;
+        this.state = 95;
         this.match(BusinessRulesParser.AS);
-        this.state = 86;
+        this.state = 96;
         this.entry_value();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -789,29 +819,29 @@ BusinessRulesParser.prototype.entries = function() {
     var localctx = new EntriesContext(this, this._ctx, this.state);
     this.enterRule(localctx, 18, BusinessRulesParser.RULE_entries);
     try {
-        this.state = 94;
+        this.state = 104;
         this._errHandler.sync(this);
         var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 88;
+            this.state = 98;
             this.entry();
-            this.state = 89;
+            this.state = 99;
             this.match(BusinessRulesParser.COMA);
-            this.state = 90;
+            this.state = 100;
             this.entries();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 92;
+            this.state = 102;
             this.entry();
             break;
 
         case 3:
             this.enterOuterAlt(localctx, 3);
-            this.state = 93;
+            this.state = 103;
             this.declared_entry();
             break;
 
@@ -861,8 +891,260 @@ BusinessRulesParser.prototype.declared_entry = function() {
     this.enterRule(localctx, 20, BusinessRulesParser.RULE_declared_entry);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 96;
+        this.state = 106;
         this.match(BusinessRulesParser.IDENTIFIER);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Verification_operationContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = BusinessRulesParser.RULE_verification_operation;
+    return this;
+}
+
+Verification_operationContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Verification_operationContext.prototype.constructor = Verification_operationContext;
+
+Verification_operationContext.prototype.type_description = function() {
+    return this.getTypedRuleContext(Type_descriptionContext,0);
+};
+
+
+
+
+BusinessRulesParser.Verification_operationContext = Verification_operationContext;
+
+BusinessRulesParser.prototype.verification_operation = function() {
+
+    var localctx = new Verification_operationContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 22, BusinessRulesParser.RULE_verification_operation);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 108;
+        this.type_description();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Verification_operationsContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = BusinessRulesParser.RULE_verification_operations;
+    return this;
+}
+
+Verification_operationsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Verification_operationsContext.prototype.constructor = Verification_operationsContext;
+
+Verification_operationsContext.prototype.verification_operation = function() {
+    return this.getTypedRuleContext(Verification_operationContext,0);
+};
+
+Verification_operationsContext.prototype.AND = function() {
+    return this.getToken(BusinessRulesParser.AND, 0);
+};
+
+Verification_operationsContext.prototype.verification_operations = function() {
+    return this.getTypedRuleContext(Verification_operationsContext,0);
+};
+
+
+
+
+BusinessRulesParser.Verification_operationsContext = Verification_operationsContext;
+
+BusinessRulesParser.prototype.verification_operations = function() {
+
+    var localctx = new Verification_operationsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 24, BusinessRulesParser.RULE_verification_operations);
+    try {
+        this.state = 115;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,3,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 110;
+            this.verification_operation();
+            this.state = 111;
+            this.match(BusinessRulesParser.AND);
+            this.state = 112;
+            this.verification_operations();
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 114;
+            this.verification_operation();
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function VerificationContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = BusinessRulesParser.RULE_verification;
+    return this;
+}
+
+VerificationContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+VerificationContext.prototype.constructor = VerificationContext;
+
+VerificationContext.prototype.IDENTIFIER = function() {
+    return this.getToken(BusinessRulesParser.IDENTIFIER, 0);
+};
+
+VerificationContext.prototype.IS = function() {
+    return this.getToken(BusinessRulesParser.IS, 0);
+};
+
+VerificationContext.prototype.verification_operations = function() {
+    return this.getTypedRuleContext(Verification_operationsContext,0);
+};
+
+
+
+
+BusinessRulesParser.VerificationContext = VerificationContext;
+
+BusinessRulesParser.prototype.verification = function() {
+
+    var localctx = new VerificationContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 26, BusinessRulesParser.RULE_verification);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 117;
+        this.match(BusinessRulesParser.IDENTIFIER);
+        this.state = 118;
+        this.match(BusinessRulesParser.IS);
+        this.state = 119;
+        this.verification_operations();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function VerificationsContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = BusinessRulesParser.RULE_verifications;
+    return this;
+}
+
+VerificationsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+VerificationsContext.prototype.constructor = VerificationsContext;
+
+VerificationsContext.prototype.verification = function() {
+    return this.getTypedRuleContext(VerificationContext,0);
+};
+
+VerificationsContext.prototype.AND = function() {
+    return this.getToken(BusinessRulesParser.AND, 0);
+};
+
+VerificationsContext.prototype.verifications = function() {
+    return this.getTypedRuleContext(VerificationsContext,0);
+};
+
+
+
+
+BusinessRulesParser.VerificationsContext = VerificationsContext;
+
+BusinessRulesParser.prototype.verifications = function() {
+
+    var localctx = new VerificationsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 28, BusinessRulesParser.RULE_verifications);
+    try {
+        this.state = 126;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 121;
+            this.verification();
+            this.state = 122;
+            this.match(BusinessRulesParser.AND);
+            this.state = 123;
+            this.verifications();
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 125;
+            this.verification();
+            break;
+
+        }
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -909,12 +1191,12 @@ BusinessRulesParser.Type_actionContext = Type_actionContext;
 BusinessRulesParser.prototype.type_action = function() {
 
     var localctx = new Type_actionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 22, BusinessRulesParser.RULE_type_action);
+    this.enterRule(localctx, 30, BusinessRulesParser.RULE_type_action);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 98;
+        this.state = 128;
         this.match(BusinessRulesParser.TYPE_ACTION);
-        this.state = 99;
+        this.state = 129;
         this.entries();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -962,12 +1244,12 @@ BusinessRulesParser.Go_to_actionContext = Go_to_actionContext;
 BusinessRulesParser.prototype.go_to_action = function() {
 
     var localctx = new Go_to_actionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 24, BusinessRulesParser.RULE_go_to_action);
+    this.enterRule(localctx, 32, BusinessRulesParser.RULE_go_to_action);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 101;
+        this.state = 131;
         this.match(BusinessRulesParser.GO_TO_ACTION);
-        this.state = 102;
+        this.state = 132;
         this.url();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1015,13 +1297,66 @@ BusinessRulesParser.Click_actionContext = Click_actionContext;
 BusinessRulesParser.prototype.click_action = function() {
 
     var localctx = new Click_actionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 26, BusinessRulesParser.RULE_click_action);
+    this.enterRule(localctx, 34, BusinessRulesParser.RULE_click_action);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 104;
+        this.state = 134;
         this.match(BusinessRulesParser.CLICK_ON);
-        this.state = 105;
+        this.state = 135;
         this.match(BusinessRulesParser.IDENTIFIER);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Verify_actionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = BusinessRulesParser.RULE_verify_action;
+    return this;
+}
+
+Verify_actionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Verify_actionContext.prototype.constructor = Verify_actionContext;
+
+Verify_actionContext.prototype.VERIFY = function() {
+    return this.getToken(BusinessRulesParser.VERIFY, 0);
+};
+
+Verify_actionContext.prototype.verifications = function() {
+    return this.getTypedRuleContext(VerificationsContext,0);
+};
+
+
+
+
+BusinessRulesParser.Verify_actionContext = Verify_actionContext;
+
+BusinessRulesParser.prototype.verify_action = function() {
+
+    var localctx = new Verify_actionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 36, BusinessRulesParser.RULE_verify_action);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 137;
+        this.match(BusinessRulesParser.VERIFY);
+        this.state = 138;
+        this.verifications();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1064,10 +1399,10 @@ BusinessRulesParser.Declared_actionContext = Declared_actionContext;
 BusinessRulesParser.prototype.declared_action = function() {
 
     var localctx = new Declared_actionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 28, BusinessRulesParser.RULE_declared_action);
+    this.enterRule(localctx, 38, BusinessRulesParser.RULE_declared_action);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 107;
+        this.state = 140;
         this.match(BusinessRulesParser.IDENTIFIER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1115,6 +1450,10 @@ StepContext.prototype.declared_action = function() {
     return this.getTypedRuleContext(Declared_actionContext,0);
 };
 
+StepContext.prototype.verify_action = function() {
+    return this.getTypedRuleContext(Verify_actionContext,0);
+};
+
 
 
 
@@ -1123,30 +1462,35 @@ BusinessRulesParser.StepContext = StepContext;
 BusinessRulesParser.prototype.step = function() {
 
     var localctx = new StepContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 30, BusinessRulesParser.RULE_step);
+    this.enterRule(localctx, 40, BusinessRulesParser.RULE_step);
     try {
-        this.state = 113;
+        this.state = 147;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case BusinessRulesParser.CLICK_ON:
             this.enterOuterAlt(localctx, 1);
-            this.state = 109;
+            this.state = 142;
             this.click_action();
             break;
         case BusinessRulesParser.TYPE_ACTION:
             this.enterOuterAlt(localctx, 2);
-            this.state = 110;
+            this.state = 143;
             this.type_action();
             break;
         case BusinessRulesParser.GO_TO_ACTION:
             this.enterOuterAlt(localctx, 3);
-            this.state = 111;
+            this.state = 144;
             this.go_to_action();
             break;
         case BusinessRulesParser.IDENTIFIER:
             this.enterOuterAlt(localctx, 4);
-            this.state = 112;
+            this.state = 145;
             this.declared_action();
+            break;
+        case BusinessRulesParser.VERIFY:
+            this.enterOuterAlt(localctx, 5);
+            this.state = 146;
+            this.verify_action();
             break;
         default:
             throw new antlr4.error.NoViableAltException(this);
@@ -1201,25 +1545,25 @@ BusinessRulesParser.StepsContext = StepsContext;
 BusinessRulesParser.prototype.steps = function() {
 
     var localctx = new StepsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 32, BusinessRulesParser.RULE_steps);
+    this.enterRule(localctx, 42, BusinessRulesParser.RULE_steps);
     try {
-        this.state = 120;
+        this.state = 154;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,6,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 115;
+            this.state = 149;
             this.step();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 116;
+            this.state = 150;
             this.step();
-            this.state = 117;
+            this.state = 151;
             this.match(BusinessRulesParser.AND);
-            this.state = 118;
+            this.state = 152;
             this.steps();
             break;
 
@@ -1278,16 +1622,16 @@ BusinessRulesParser.Action_declarationContext = Action_declarationContext;
 BusinessRulesParser.prototype.action_declaration = function() {
 
     var localctx = new Action_declarationContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 34, BusinessRulesParser.RULE_action_declaration);
+    this.enterRule(localctx, 44, BusinessRulesParser.RULE_action_declaration);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 122;
+        this.state = 156;
         this.match(BusinessRulesParser.TO);
-        this.state = 123;
+        this.state = 157;
         this.match(BusinessRulesParser.IDENTIFIER);
-        this.state = 124;
+        this.state = 158;
         this.match(BusinessRulesParser.YOU_MUST);
-        this.state = 125;
+        this.state = 159;
         this.steps();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1335,16 +1679,16 @@ BusinessRulesParser.Action_declarationsContext = Action_declarationsContext;
 BusinessRulesParser.prototype.action_declarations = function() {
 
     var localctx = new Action_declarationsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 36, BusinessRulesParser.RULE_action_declarations);
+    this.enterRule(localctx, 46, BusinessRulesParser.RULE_action_declarations);
     try {
-        this.state = 131;
+        this.state = 165;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case BusinessRulesParser.TO:
             this.enterOuterAlt(localctx, 1);
-            this.state = 127;
+            this.state = 161;
             this.action_declaration();
-            this.state = 128;
+            this.state = 162;
             this.action_declarations();
             break;
         case BusinessRulesParser.EOF:
@@ -1401,12 +1745,12 @@ BusinessRulesParser.Execute_actionContext = Execute_actionContext;
 BusinessRulesParser.prototype.execute_action = function() {
 
     var localctx = new Execute_actionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 38, BusinessRulesParser.RULE_execute_action);
+    this.enterRule(localctx, 48, BusinessRulesParser.RULE_execute_action);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 133;
+        this.state = 167;
         this.match(BusinessRulesParser.DO);
-        this.state = 134;
+        this.state = 168;
         this.declared_action();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1454,16 +1798,16 @@ BusinessRulesParser.Execute_actionsContext = Execute_actionsContext;
 BusinessRulesParser.prototype.execute_actions = function() {
 
     var localctx = new Execute_actionsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 40, BusinessRulesParser.RULE_execute_actions);
+    this.enterRule(localctx, 50, BusinessRulesParser.RULE_execute_actions);
     try {
-        this.state = 140;
+        this.state = 174;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case BusinessRulesParser.DO:
             this.enterOuterAlt(localctx, 1);
-            this.state = 136;
+            this.state = 170;
             this.execute_action();
-            this.state = 137;
+            this.state = 171;
             this.execute_actions();
             break;
         case BusinessRulesParser.EOF:
@@ -1511,8 +1855,8 @@ Entry_declarationContext.prototype.IDENTIFIER = function() {
     return this.getToken(BusinessRulesParser.IDENTIFIER, 0);
 };
 
-Entry_declarationContext.prototype.IS = function() {
-    return this.getToken(BusinessRulesParser.IS, 0);
+Entry_declarationContext.prototype.AS = function() {
+    return this.getToken(BusinessRulesParser.AS, 0);
 };
 
 Entry_declarationContext.prototype.entries = function() {
@@ -1527,16 +1871,16 @@ BusinessRulesParser.Entry_declarationContext = Entry_declarationContext;
 BusinessRulesParser.prototype.entry_declaration = function() {
 
     var localctx = new Entry_declarationContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 42, BusinessRulesParser.RULE_entry_declaration);
+    this.enterRule(localctx, 52, BusinessRulesParser.RULE_entry_declaration);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 142;
+        this.state = 176;
         this.match(BusinessRulesParser.ENTRY);
-        this.state = 143;
+        this.state = 177;
         this.match(BusinessRulesParser.IDENTIFIER);
-        this.state = 144;
-        this.match(BusinessRulesParser.IS);
-        this.state = 145;
+        this.state = 178;
+        this.match(BusinessRulesParser.AS);
+        this.state = 179;
         this.entries();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1584,17 +1928,17 @@ BusinessRulesParser.Entry_declarationsContext = Entry_declarationsContext;
 BusinessRulesParser.prototype.entry_declarations = function() {
 
     var localctx = new Entry_declarationsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 44, BusinessRulesParser.RULE_entry_declarations);
+    this.enterRule(localctx, 54, BusinessRulesParser.RULE_entry_declarations);
     try {
-        this.state = 151;
+        this.state = 185;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,7,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,9,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 147;
+            this.state = 181;
             this.entry_declaration();
-            this.state = 148;
+            this.state = 182;
             this.entry_declarations();
             break;
 
@@ -1654,14 +1998,14 @@ BusinessRulesParser.DeclarationsContext = DeclarationsContext;
 BusinessRulesParser.prototype.declarations = function() {
 
     var localctx = new DeclarationsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 46, BusinessRulesParser.RULE_declarations);
+    this.enterRule(localctx, 56, BusinessRulesParser.RULE_declarations);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 153;
+        this.state = 187;
         this.entry_declarations();
-        this.state = 154;
+        this.state = 188;
         this.type_declarations(0);
-        this.state = 155;
+        this.state = 189;
         this.action_declarations();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1705,10 +2049,10 @@ BusinessRulesParser.ExecutionsContext = ExecutionsContext;
 BusinessRulesParser.prototype.executions = function() {
 
     var localctx = new ExecutionsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 48, BusinessRulesParser.RULE_executions);
+    this.enterRule(localctx, 58, BusinessRulesParser.RULE_executions);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 157;
+        this.state = 191;
         this.execute_actions();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1756,12 +2100,12 @@ BusinessRulesParser.MainContext = MainContext;
 BusinessRulesParser.prototype.main = function() {
 
     var localctx = new MainContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 50, BusinessRulesParser.RULE_main);
+    this.enterRule(localctx, 60, BusinessRulesParser.RULE_main);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 159;
+        this.state = 193;
         this.declarations();
-        this.state = 160;
+        this.state = 194;
         this.executions();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1805,10 +2149,10 @@ BusinessRulesParser.UrlContext = UrlContext;
 BusinessRulesParser.prototype.url = function() {
 
     var localctx = new UrlContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 52, BusinessRulesParser.RULE_url);
+    this.enterRule(localctx, 62, BusinessRulesParser.RULE_url);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 162;
+        this.state = 196;
         this.match(BusinessRulesParser.QUOTED_CONTENT);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {

@@ -1,3 +1,3 @@
-entry addition_parameters is op1 as number, op1 as number
+entry addition_parameters as op1 as number, op1 as number
 
 to add you must type addition_parameters

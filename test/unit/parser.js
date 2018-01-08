@@ -5,7 +5,7 @@ const Parser = require('../../src/parser/parser');
 const action_natures = require("../../src/parser/elements/actions/action_nature");
 const Types = require('../../src/parser/elements/types/types');
 const Action = require("../../src/parser/elements/actions/action");
-const TypeActionEntry = require("../../src/parser/elements/actions/type_action_entry");
+const TypeActionEntry = require("../../src/parser/elements/actions/type/type_action_entry");
 
 
 module.exports = function() {
@@ -255,6 +255,21 @@ module.exports = function() {
                     const click_action = action.steps[0];
                     expect(click_action).to.be.instanceOf(action_natures.ClickAction);
                     expect(click_action.target).to.be.eql("talk_button");
+                    done();
+                })
+                    .catch((err) => done(err))
+            });
+        });
+
+        describe("Verify Action", () => {
+            it.only("should create a verification action", (done) => {
+                Parser.parseFile(path.join(__dirname, '../inputs/action_natures/verification_action')).then((spec) => {
+                    expect(spec.actions).to.have.lengthOf(1);
+                    const action = spec.actions.find((action) => action.name === "check_valid_output");
+                    const verification_action = action.steps[0];
+                    expect(verification_action).to.be.instanceOf(action_natures.VerificationAction);
+                    expect(verification_action.target).to.be.eql("output");
+                    expect(verification_action.content_nature).to.be.eql('Action');
                     done();
                 })
                     .catch((err) => done(err))

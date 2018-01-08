@@ -6,7 +6,7 @@ const Parser = require('../../src/parser/parser');
 const NightmareFactory = require('../../src/nightmare_factory/nightmare_factory');
 
 module.exports = function() {
-    describe('From Tests Cases', () => {
+    describe('Action creations', () => {
 
         it('create a scenario with type_declared', (done) => {
             Parser.parseFile(path.join(__dirname, "../inputs/executions/declared_action"))
@@ -116,6 +116,12 @@ module.exports = function() {
                 })
         });
 
+    });
+
+    describe('Verifing results', () => {
+      it('should evaluate results accord to the test_case', (done) => {
+        done(new Error('not implemented'))
+      })
     });
 
     describe('Test demo scenarii', () => {

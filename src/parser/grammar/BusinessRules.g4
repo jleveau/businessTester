@@ -20,13 +20,20 @@ entry               : IDENTIFIER AS entry_value;
 entries             : entry COMA entries | entry | declared_entry;
 declared_entry      : IDENTIFIER;
 
+///Verification
+verification_operation   : type_description;
+verification_operations  : verification_operation AND verification_operations |verification_operation;
+verification            : IDENTIFIER IS verification_operations;
+verifications           : verification AND verifications | verification;
+
 /// Actions
 type_action         : TYPE_ACTION entries;
 go_to_action        : GO_TO_ACTION url;
 click_action        : CLICK_ON IDENTIFIER;
+verify_action       : VERIFY verifications;
 declared_action     : IDENTIFIER;
 
-step                : click_action | type_action | go_to_action | declared_action;
+step                : click_action | type_action | go_to_action | declared_action | verify_action;
 steps               : step | step AND steps;
 
 action_declaration	: TO IDENTIFIER YOU_MUST steps;
@@ -35,7 +42,7 @@ action_declarations : action_declaration action_declarations |;
 execute_action      : DO declared_action;
 execute_actions     : execute_action execute_actions |;
 
-entry_declaration   : ENTRY IDENTIFIER IS entries;
+entry_declaration   : ENTRY IDENTIFIER AS entries;
 entry_declarations  : entry_declaration entry_declarations |;
 
 /// Main
@@ -70,6 +77,7 @@ TO 				    : 'to';
 DO                  : 'do';
 AS                  : 'as';
 IS                  : 'is';
+VERIFY              : 'verify';
 YOU_MUST            : 'you must';
 TYPE_ACTION         : 'type';
 THEN                : 'then';

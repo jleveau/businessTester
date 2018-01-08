@@ -6,7 +6,8 @@ const RegexType = require('./elements/types/regex_type');
 const Spec = require('./elements/spec');
 const antlr4 = require('antlr4/index');
 const action_natures = require('./elements/actions/action_nature');
-const TypeActionEntry = require('./elements/actions/type_action_entry');
+const TypeActionEntry = require('./elements/actions/type/type_action_entry');
+const VerificationEntry = require('./elements/actions/verify/verification_operation_decorator');
 
 // This class defines a complete generic visitor for a parse tree produced by BusinessRulesParser.
 
@@ -93,6 +94,37 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         return ctx.QUOTED_CONTENT().getText();
     }
 
+    visitVerificationOperation(ctx, spec) {
+        return new VerificationEntry(this.visitType_description(ctx.type_description(), spec));
+    }
+
+    visitVerificationOperations(ctx, spec) {
+        let operation = this.visitVerificationOperation(ctx.verification_operation(), spec);
+        if (ctx.verification_operations()) {
+            operation.next_verification = this.visitVerificationOperations(ctx.verification_operations(), spec);
+        }
+        return operation;
+    }
+
+    visitVerification(ctx, spec) {
+        const target = ctx.IDENTIFIER().getText();
+        const operation = this.visitVerificationOperations(ctx.verification_operations(), spec);
+        return new VerificationEntry(target, operation);
+    }
+
+    visitVerifications(ctx, spec, verification_list=[]) {
+        if (ctx.verification()) {
+            verification_list.push(this.visitVerification(ctx.verification(), spec));
+        }
+        if (ctx.verifications()) {
+            this.visitVerifications(ctx.verifications(), spec, verification_list);
+        }
+    }
+
+    visitVerify_action(ctx, spec) {
+        return new action_natures.VerificationAction(this.visitVerifications(ctx.verifications(), spec));
+    }
+
     visitDefault_type(ctx, spec) {
         if (ctx.ALPHANUM()) {
             return ctx.ALPHANUM().getText();
@@ -154,17 +186,20 @@ class BusinessRulesVisitor extends antlr4.tree.ParseTreeVisitor {
         /*   if (ctx.declared_action()) {
                return this.visitDeclared_action(ctx.declared_action(), spec);
            }*/
-        if(ctx.click_action()) {
+        if (ctx.click_action()) {
             return this.visitClick_action(ctx.click_action(), spec);
         }
         if (ctx.type_action()) {
             return this.visitType_action(ctx.type_action(), spec);
         }
-        if(ctx.go_to_action()) {
+        if (ctx.go_to_action()) {
             return this.visitGo_to_action(ctx.go_to_action(), spec);
         }
-        if(ctx.declared_action()) {
+        if (ctx.declared_action()) {
             return this.visitDeclared_action(ctx.declared_action(), spec);
+        }
+        if (ctx.verify_action()) {
+            return this.visitVerify_action(ctx.verify_action(), spec);
         }
     }
 

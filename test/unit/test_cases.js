@@ -179,7 +179,11 @@ module.exports = function() {
                 })
                 .catch((err) =>
                     done(err))
-        })
+        });
+
+        it("should create a test_case with verifications actions", (done) => {
+            done(new Error('not implemented'))
+        });
 
     });
 };
